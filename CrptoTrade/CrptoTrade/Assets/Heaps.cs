@@ -37,9 +37,9 @@ namespace CrptoTrade.Assets
             return TryPeekOrGetMin(x => true, out val);
         }
 
-        public bool TryPeekOrGetMin(Func<T, bool> getPredicate, out T val)
+        public bool TryPeekOrGetMin(Func<T, bool> predicate, out T val)
         {
-            return TryPeekOrGet(getPredicate, out val);
+            return TryPeekOrExtract(predicate, true, out val);
         }
     }
 
@@ -74,9 +74,9 @@ namespace CrptoTrade.Assets
             return TryPeekOrGetMax(x => true, out val);
         }
 
-        public bool TryPeekOrGetMax(Func<T, bool> getPredicate, out T val)
+        public bool TryPeekOrGetMax(Func<T, bool> predicate, out T val)
         {
-            return TryPeekOrGet(getPredicate, out val);
+            return TryPeekOrExtract(predicate, true, out val);
         }
     }
 
@@ -204,9 +204,9 @@ namespace CrptoTrade.Assets
             }
         }
 
-        protected bool TryPeekOrGet(Func<T, bool> getPredicate, out T val)
+        //returns predicate status
+        protected bool TryPeekOrExtract(Func<T, bool> predicate, bool extractIfPredicate, out T val)
         {
-            bool rootChanged;
             lock (_syncRoot)
             {
                 if (_highIndex < 0)
@@ -215,17 +215,13 @@ namespace CrptoTrade.Assets
                     return false;
                 }
                 val = _data[0].Obj;
-                rootChanged = getPredicate(val);
-                if (rootChanged)
-                {
-                    _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
-                    _positionLookUp.Remove(val);
-                    _data.RemoveAt(_highIndex--);
-                    Heapify(0);
-                }
+                if (!predicate(val)) return false;
+                if (!extractIfPredicate) return true;
+                _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
+                _positionLookUp.Remove(val);
+                _data.RemoveAt(_highIndex--);
+                Heapify(0);
             }
-            //Always outside of LOCK
-            if (rootChanged) RootChanged(Id);
             return true;
         }
 

@@ -41,9 +41,35 @@ namespace CrptoTrade.Assets
             }
         }
 
+        public void FindSizeAndPrice(TradePosition position)
+        {
+            //going to return true, when Trade position consumes
+            //all the units of the Quote, so the Min will change
+            //thus requirement of reheapification.
+            if (TryPeekOrExtract(heap =>
+            {
+                return heap.TryPeekOrGetMin(quote =>
+                {
+                    quote.AdjustBuyPosition(position);
+                    return quote.IsZero;
+                }, out Quote outQuote);
+            }, false, out MinHeap<Quote> affectedHeap))
+            {
+                //we set 3rd param false so that Heap does NOT change
+                //and if return value is TRUE it means our quote heap
+                //was modified!
+                OnMinChanged(affectedHeap);
+            }
+        }
+
         private void OnMinChanged(int id)
         {
-            Reheapify(_minHeaps[id]);
+            OnMinChanged(_minHeaps[id]);
+        }
+
+        private void OnMinChanged(MinHeap<Quote> heap)
+        {
+            Reheapify(heap);
         }
 
         protected override bool StopBubbleUp(MinHeap<Quote> parent, MinHeap<Quote> child)
@@ -73,9 +99,35 @@ namespace CrptoTrade.Assets
             }
         }
 
+        public void FindPriceAdjustSize(TradePosition position)
+        {
+            //going to return true, when Trade position consumes
+            //all the units of the Quote, so the Min will change
+            //thus requirement of reheapification.
+            if (TryPeekOrExtract(heap =>
+            {
+                return heap.TryPeekOrGetMax(quote =>
+                {
+                    quote.AdjustSellPosition(position);
+                    return quote.IsZero;
+                }, out Quote nouse);
+            }, false, out MaxHeap<Quote> affectedHeap))
+            {
+                //we set 3rd param false so that Heap does NOT change
+                //and if return value is TRUE it means our quote heap
+                //was modified!
+                OnMaxChanged(affectedHeap);
+            }
+        }
+
         private void OnMaxChanged(int id)
         {
-            Reheapify(_maxHeaps[id]);
+            OnMaxChanged(_maxHeaps[id]);
+        }
+
+        private void OnMaxChanged(MaxHeap<Quote> heap)
+        {
+            Reheapify(heap);
         }
 
         protected override bool StopBubbleUp(MaxHeap<Quote> parent, MaxHeap<Quote> child)

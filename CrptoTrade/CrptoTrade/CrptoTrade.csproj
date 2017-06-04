@@ -46,6 +46,7 @@
     <Compile Include="Assets\HeapOfHeaps.cs" />
     <Compile Include="Assets\Heaps.cs" />
     <Compile Include="Assets\Quote.cs" />
+    <Compile Include="Assets\TradePosition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

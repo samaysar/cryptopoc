@@ -24,12 +24,22 @@ namespace CrptoTrade.Assets
             _minsize = minSize;
         }
 
-        public double ReduceValue(double tradeValue, out double tradeSize)
+        public void AdjustBuyPosition(TradePosition position)
         {
-            var tradableUnits = Math.Min((int) (tradeValue / Price), _units);
-            tradeSize = tradableUnits * _minsize;
+            var tradableUnits = Math.Min((int) (position.Value / Price), _units);
             _units -= tradableUnits;
-            return tradeValue - (tradableUnits * Price);
+            position.Size = tradableUnits * _minsize;
+            position.Value -= (tradableUnits * Price);
+            position.Price = Price;
+        }
+
+        public void AdjustSellPosition(TradePosition position)
+        {
+            var tradableUnits = Math.Min((int) (position.Size / _minsize), _units);
+            _units -= tradableUnits;
+            position.Size -= (tradableUnits * _minsize);
+            position.Value += (tradableUnits * Price);
+            position.Price = Price;
         }
 
         public int CompareTo(Quote other)
