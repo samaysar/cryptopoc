@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace CrptoTrade.Assets
 {
+    public delegate void MinChangeHandler(int id);
     //We need to have IComparable<T> on Bid/Ask price and IEquatable<T> on the identifier, if any (for streaming data REMOVAL purpose)
 
     public sealed class MinHeap<T> : AbsHeap<T> where T : IComparable<T>
@@ -19,6 +20,26 @@ namespace CrptoTrade.Assets
         protected override bool MustBubbleUp(T child, T parent)
         {
             return child.CompareTo(parent) < 0;
+        }
+
+        public void RemoveVal(T val)
+        {
+            Remove(val);
+        }
+
+        public void InsertVal(T newVal)
+        {
+            Insert(newVal);
+        }
+
+        public bool TryGetMin(out T val)
+        {
+            return TryPeekOrGetMin(x => true, out val);
+        }
+
+        public bool TryPeekOrGetMin(Func<T, bool> getPredicate, out T val)
+        {
+            return TryPeekOrGet(getPredicate, out val);
         }
     }
 
@@ -37,17 +58,39 @@ namespace CrptoTrade.Assets
         {
             return child.CompareTo(parent) > 0;
         }
+
+        public void RemoveVal(T val)
+        {
+            Remove(val);
+        }
+
+        public void InsertVal(T newVal)
+        {
+            Insert(newVal);
+        }
+
+        public bool TryGetMax(out T val)
+        {
+            return TryPeekOrGetMax(x => true, out val);
+        }
+
+        public bool TryPeekOrGetMax(Func<T, bool> getPredicate, out T val)
+        {
+            return TryPeekOrGet(getPredicate, out val);
+        }
     }
 
-    public abstract class AbsHeap<T>
+    public abstract class AbsHeap<T> : IComparable<AbsHeap<T>> where T : IComparable<T>
     {
+        public static readonly IEqualityComparer<AbsHeap<T>> Equality = new AbsHeapEquality();
         private int _highIndex;
         private readonly object _syncRoot = new object();
         private readonly List<PositionWrapped> _data;
 
         //PartitionedDictionary ? => Not now!
         private readonly Dictionary<T, PositionWrapped> _positionLookUp;
-
+        public event MinChangeHandler RootChanged = x => { };
+        
         protected AbsHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16*1024)
         {
             Id = id;
@@ -58,7 +101,7 @@ namespace CrptoTrade.Assets
 
         public int Id { get; }
 
-        public void Remove(T val)
+        protected void Remove(T val)
         {
             lock (_syncRoot)
             {
@@ -87,49 +130,83 @@ namespace CrptoTrade.Assets
             }
         }
 
-        public void Insert(T newVal)
+        protected void Reheapify(T val)
         {
             lock (_syncRoot)
             {
-                var wrapper = new PositionWrapped(newVal, _data.Count);
-                _positionLookUp.Add(newVal, wrapper);
-                _data.Add(wrapper);
-                var current = ++_highIndex;
-                while (current > 0)
+                try
                 {
-                    var parent = (current - 1) >> 1;
-                    var parentVal = _data[parent];
-                    if (StopBubbleUp(parentVal.Obj, newVal))
+                }
+                finally
+                {
+                    if (_positionLookUp.TryGetValue(val, out PositionWrapped wrapper))
                     {
-                        break;
-                    }
-                    _data[current] = new PositionWrapped(_data[parent].Obj, current);
-                    wrapper.Position = parent;
-                    _data[parent] = wrapper;
+                        var current = wrapper.Position;
+                        //we need to do BOTH bubbleUP and DOWN as we dont know whats the new value
+                        //but as we know values are continously changing behind the scene
+                        //we should perform ONLY one side... so that we can get out of the lock
+                        //quickly
 
-                    current = parent;
+                        while (current > 0)
+                        {
+                            var parent = (current - 1) >> 1;
+                            var parentVal = _data[parent];
+                            if (StopBubbleUp(parentVal.Obj, val))
+                            {
+                                break;
+                            }
+                            _data[current] = new PositionWrapped(parentVal.Obj, current);
+                            wrapper.Position = parent;
+                            _data[parent] = wrapper;
+
+                            current = parent;
+                        }
+                        if (current == wrapper.Position) Heapify(current);
+                    }
                 }
             }
         }
-        
-        public bool TryGetRoot(out T min)
+
+        protected void Insert(T newVal)
         {
+            var current = -1;
             lock (_syncRoot)
             {
-                if (_highIndex < 0)
+                try
                 {
-                    min = default(T);
-                    return false;
                 }
+                finally
+                {
+                    var wrapper = new PositionWrapped(newVal, _data.Count);
+                    _positionLookUp.Add(newVal, wrapper);
+                    _data.Add(wrapper);
+                    current = ++_highIndex;
+                    while (current > 0)
+                    {
+                        var parent = (current - 1) >> 1;
+                        var parentVal = _data[parent];
+                        if (StopBubbleUp(parentVal.Obj, newVal))
+                        {
+                            break;
+                        }
+                        _data[current] = new PositionWrapped(parentVal.Obj, current);
+                        wrapper.Position = parent;
+                        _data[parent] = wrapper;
 
-                min = _data[0].Obj;
-                PostExtraction(min);
-                return true;
+                        current = parent;
+                    }
+                }
+            }
+            //Always outside of LOCK
+            if (current == 0)
+            {
+                RootChanged(Id);
             }
         }
 
-        public bool TryPeekOrGet(Func<T, bool> getPredicate, out T val)
+        protected bool TryPeekOrGet(Func<T, bool> getPredicate, out T val)
         {
+            bool rootChanged;
             lock (_syncRoot)
             {
                 if (_highIndex < 0)
@@ -138,21 +215,27 @@ namespace CrptoTrade.Assets
                     return false;
                 }
                 val = _data[0].Obj;
-                if (getPredicate(val))
+                rootChanged = getPredicate(val);
+                if (rootChanged)
                 {
-                    PostExtraction(val);
+                    _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
+                    _positionLookUp.Remove(val);
+                    _data.RemoveAt(_highIndex--);
+                    Heapify(0);
                 }
-                return true;
             }
+            //Always outside of LOCK
+            if (rootChanged) RootChanged(Id);
+            return true;
         }
 
-        private void PostExtraction(T extractVal, int extractAt = 0)
-        {
-            _data[extractAt] = new PositionWrapped(_data[_highIndex].Obj, extractAt);
-            _positionLookUp.Remove(extractVal);
-            _data.RemoveAt(_highIndex--);
-            Heapify(extractAt);
-        }
+        //private void PostExtraction(T extractVal)
+        //{
+        //    _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
+        //    _positionLookUp.Remove(extractVal);
+        //    _data.RemoveAt(_highIndex--);
+        //    Heapify(0);
+        //}
 
         private void Heapify(int startPos)
         {
@@ -185,8 +268,35 @@ namespace CrptoTrade.Assets
             }
         }
 
+        private int GivenCompareToRoot(T val)
+        {
+            lock (_syncRoot)
+            {
+                //we need to compare "GIVEN" value to our value!!!
+                return _highIndex < 0 ? 1 : val.CompareTo(_data[0].Obj);
+            }
+        }
+
         protected abstract bool StopBubbleUp(T parent, T child);
         protected abstract bool MustBubbleUp(T child, T parent);
+
+        public int CompareTo(AbsHeap<T> other)
+        {
+            if (ReferenceEquals(other, null)) return 1;
+            if (ReferenceEquals(this, other)) return 0;
+            T myVal;
+            lock (_syncRoot)
+            {
+                if (_highIndex < 0) return -1;
+                myVal = _data[0].Obj;
+            }
+            //!!! ALWAYS OUTSIDE OF LOCK... else DEADLOCK can happen
+            //other will take the lock inside this call
+
+            //It is OK, if during this time, value changes again => Opportunity COST!
+            //But we cannot avoid it... it's the best effort!
+            return other.GivenCompareToRoot(myVal);
+        }
 
         private struct PositionWrapped
         {
@@ -198,6 +308,29 @@ namespace CrptoTrade.Assets
                 Obj = obj;
                 Position = pos;
             }
+        }
+
+        private class AbsHeapEquality : IEqualityComparer<AbsHeap<T>>
+        {
+            public bool Equals(AbsHeap<T> x, AbsHeap<T> y)
+            {
+                return x.Id == y.Id;
+            }
+
+            public int GetHashCode(AbsHeap<T> obj)
+            {
+                return obj.Id;
+            }
+        }
+    }
+
+    public class MinChangeArgs : EventArgs
+    {
+        public int Id { get; }
+
+        public MinChangeArgs(int id)
+        {
+            Id = id;
         }
     }
 }

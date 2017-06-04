@@ -10,23 +10,24 @@ namespace CrptoTrade.Assets
 
         //can we set it somewhr as const value?
         private readonly double _minsize;
-        private double _units;
+        private int _units;
         public readonly double Price;
         public readonly string Id;
 
-        public bool CanRemove => _units.Equals(0);
+        public bool IsZero => _units == 0;
 
-        public Quote(double price, double units, string id, double minsize)
+        public Quote(double priceOfMinSize, double totalSize, string id, double minSize)
         {
-            Price = price;
-            _units = units;
+            Price = priceOfMinSize;
+            _units = (int) (totalSize / minSize);
             Id = id;
-            _minsize = minsize;
+            _minsize = minSize;
         }
 
-        public double ReduceValue(double tradeValue)
+        public double ReduceValue(double tradeValue, out double tradeSize)
         {
-            var tradableUnits = Math.Min(((int) ((tradeValue / Price) / _minsize)) * _minsize, _units);
+            var tradableUnits = Math.Min((int) (tradeValue / Price), _units);
+            tradeSize = tradableUnits * _minsize;
             _units -= tradableUnits;
             return tradeValue - (tradableUnits * Price);
         }

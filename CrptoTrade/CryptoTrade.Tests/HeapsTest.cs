@@ -14,50 +14,84 @@ namespace CryptoTrade.Tests
         [Test]
         [TestCase(true, 256 * 1024, false, 0)] //256k
         [TestCase(false, 256 * 1024, false, 0)] //256k
-        [TestCase(true, 16 * 1024 * 1024, false, 0)] //16M
-        [TestCase(false, 16 * 1024 * 1024, false, 0)] //16M
+        [TestCase(true, 1024 * 1024, false, 0)] //1M
+        [TestCase(false, 1024 * 1024, false, 0)] //1M
         [TestCase(true, 256 * 1024, true, 2)] //256k
         [TestCase(false, 256 * 1024, true, 2)] //256k
-        [TestCase(true, 16 * 1024 * 1024, true, 8)] //16M
-        [TestCase(false, 16 * 1024 * 1024, true, 8)] //16M
+        [TestCase(true, 1024 * 1024, true, 8)] //1M
+        [TestCase(false, 1024 * 1024, true, 8)] //1M
         public void Heap_Latency(bool maxHeap, int size, bool measureExtract, int extractCon)
         {
             var arr = new Wrapper[size];
             Populate(arr);
-            var h = CreateHeap(arr, maxHeap);
-            if (measureExtract)
+            if (maxHeap)
             {
-                MeasureExtractTime(h, extractCon);
+                var h = CreateMaxHeap(arr);
+                if (measureExtract)
+                {
+                    MeasureExtractTime(h, extractCon);
+                }
+                else
+                {
+                    MakeAsserts(arr, h);
+                }
             }
             else
             {
-                MakeAsserts(arr, h, maxHeap);
+                var h = CreateMinHeap(arr);
+                if (measureExtract)
+                {
+                    MeasureExtractTime(h, extractCon);
+                }
+                else
+                {
+                    MakeAsserts(arr, h);
+                }
             }
-            Assert.False(h.TryGetRoot(out Wrapper val));
         }
 
-        private static void MakeAsserts(Wrapper[] arr, AbsHeap<Wrapper> h, bool maxHeap)
+        private static void MakeAsserts(Wrapper[] arr, MinHeap<Wrapper> h)
         {
-            arr = maxHeap
-                    ? arr.OrderByDescending(x => x.Value).ToArray()
-                    : arr.OrderBy(x => x.Value).ToArray();
+            arr = arr.OrderBy(x => x.Value).ToArray();
             for (var i = 0; i < arr.Length;)
             {
-                Assert.True(h.TryGetRoot(out Wrapper val) && arr[i++].Value.Equals(val.Value));
+                Assert.True(h.TryGetMin(out Wrapper val) && arr[i++].Value.Equals(val.Value));
             }
         }
 
-        private static void MeasureExtractTime(AbsHeap<Wrapper> h, int con)
+        private static void MakeAsserts(Wrapper[] arr, MaxHeap<Wrapper> h)
+        {
+            arr = arr.OrderByDescending(x => x.Value).ToArray();
+            for (var i = 0; i < arr.Length;)
+            {
+                Assert.True(h.TryGetMax(out Wrapper val) && arr[i++].Value.Equals(val.Value));
+            }
+        }
+
+        private static void MeasureExtractTime(MinHeap<Wrapper> h, int con)
         {
             var sw = Stopwatch.StartNew();
             Parallel.For(0, con, i =>
             {
-                while (h.TryGetRoot(out Wrapper val))
+                while (h.TryGetMin(out Wrapper val))
                 {
                 }
             });
             sw.Stop();
-            Console.Out.WriteLine($"Extract Time:{sw.Elapsed.TotalMilliseconds}");
+            Console.Out.WriteLine($"MinHeap Extract Time:{sw.Elapsed.TotalMilliseconds}");
+        }
+
+        private static void MeasureExtractTime(MaxHeap<Wrapper> h, int con)
+        {
+            var sw = Stopwatch.StartNew();
+            Parallel.For(0, con, i =>
+            {
+                while (h.TryGetMax(out Wrapper val))
+                {
+                }
+            });
+            sw.Stop();
+            Console.Out.WriteLine($"MaxHeap Extract Time:{sw.Elapsed.TotalMilliseconds}");
         }
 
         private static void Populate(Wrapper[] arr)
@@ -76,18 +110,29 @@ namespace CryptoTrade.Tests
             });
         }
 
-        private static AbsHeap<Wrapper> CreateHeap(IReadOnlyList<Wrapper> arr, bool max = true)
+        private static MinHeap<Wrapper> CreateMinHeap(IReadOnlyList<Wrapper> arr)
         {
-            var h = max
-                ? (AbsHeap<Wrapper>) new MaxHeap<Wrapper>(0, new WrapperEquality(), arr.Count)
-                : new MinHeap<Wrapper>(0, new WrapperEquality(), arr.Count);
+            var h = new MinHeap<Wrapper>(0, new WrapperEquality(), arr.Count);
             var sw = Stopwatch.StartNew();
             for (var i = 0; i < arr.Count;)
             {
-                h.Insert(arr[i++]);
+                h.InsertVal(arr[i++]);
             }
             sw.Stop();
-            Console.Out.WriteLine($"Insert Time:{sw.Elapsed.TotalMilliseconds} for {arr.Count}");
+            Console.Out.WriteLine($"MinHeap Insert Time:{sw.Elapsed.TotalMilliseconds} for {arr.Count}");
+            return h;
+        }
+
+        private static MaxHeap<Wrapper> CreateMaxHeap(IReadOnlyList<Wrapper> arr)
+        {
+            var h =new MaxHeap<Wrapper>(0, new WrapperEquality(), arr.Count);
+            var sw = Stopwatch.StartNew();
+            for (var i = 0; i < arr.Count;)
+            {
+                h.InsertVal(arr[i++]);
+            }
+            sw.Stop();
+            Console.Out.WriteLine($"MaxHeap Insert Time:{sw.Elapsed.TotalMilliseconds} for {arr.Count}");
             return h;
         }
 
