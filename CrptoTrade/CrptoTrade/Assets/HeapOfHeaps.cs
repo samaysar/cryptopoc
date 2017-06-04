@@ -43,33 +43,21 @@ namespace CrptoTrade.Assets
 
         public void FindSizeAndPrice(TradePosition position)
         {
-            //going to return true, when Trade position consumes
-            //all the units of the Quote, so the Min will change
-            //thus requirement of reheapification.
-            if (TryPeekOrExtract(heap =>
+            Heapify(heap =>
             {
-                return heap.TryPeekOrGetMin(quote =>
+                //if quote is Zero, then it will b remove from Quote Heap
+                //and our heap will be reheapfied
+                return heap.Remove(quote =>
                 {
                     quote.AdjustBuyPosition(position);
                     return quote.IsZero;
-                }, out Quote outQuote);
-            }, false, out MinHeap<Quote> affectedHeap))
-            {
-                //we set 3rd param false so that Heap does NOT change
-                //and if return value is TRUE it means our quote heap
-                //was modified!
-                OnMinChanged(affectedHeap);
-            }
+                });
+            });
         }
 
         private void OnMinChanged(int id)
         {
-            OnMinChanged(_minHeaps[id]);
-        }
-
-        private void OnMinChanged(MinHeap<Quote> heap)
-        {
-            Reheapify(heap);
+            Reheapify(_minHeaps[id]);
         }
 
         protected override bool StopBubbleUp(MinHeap<Quote> parent, MinHeap<Quote> child)
@@ -101,33 +89,21 @@ namespace CrptoTrade.Assets
 
         public void FindPriceAdjustSize(TradePosition position)
         {
-            //going to return true, when Trade position consumes
-            //all the units of the Quote, so the Min will change
-            //thus requirement of reheapification.
-            if (TryPeekOrExtract(heap =>
+            Heapify(heap =>
             {
-                return heap.TryPeekOrGetMax(quote =>
+                //if quote is Zero, then it will b remove from Quote Heap
+                //and our heap will be reheapfied
+                return heap.Remove(quote =>
                 {
                     quote.AdjustSellPosition(position);
                     return quote.IsZero;
-                }, out Quote nouse);
-            }, false, out MaxHeap<Quote> affectedHeap))
-            {
-                //we set 3rd param false so that Heap does NOT change
-                //and if return value is TRUE it means our quote heap
-                //was modified!
-                OnMaxChanged(affectedHeap);
-            }
+                });
+            });
         }
 
         private void OnMaxChanged(int id)
         {
-            OnMaxChanged(_maxHeaps[id]);
-        }
-
-        private void OnMaxChanged(MaxHeap<Quote> heap)
-        {
-            Reheapify(heap);
+            Reheapify(_maxHeaps[id]);
         }
 
         protected override bool StopBubbleUp(MaxHeap<Quote> parent, MaxHeap<Quote> child)

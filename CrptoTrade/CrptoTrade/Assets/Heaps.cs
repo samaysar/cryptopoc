@@ -225,6 +225,31 @@ namespace CrptoTrade.Assets
             return true;
         }
 
+        protected void Heapify(Func<T, bool> predicate)
+        {
+            lock (_syncRoot)
+            {
+                if (_highIndex < 0 || !predicate(_data[0].Obj)) return;
+                Heapify(0);
+            }
+        }
+
+        //returns predicate status
+        public bool Remove(Func<T, bool> predicate)
+        {
+            lock (_syncRoot)
+            {
+                if (_highIndex < 0) return false;
+                var val = _data[0].Obj;
+                if (!predicate(val)) return false;
+                _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
+                _positionLookUp.Remove(val);
+                _data.RemoveAt(_highIndex--);
+                Heapify(0);
+            }
+            return true;
+        }
+
         //private void PostExtraction(T extractVal)
         //{
         //    _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
