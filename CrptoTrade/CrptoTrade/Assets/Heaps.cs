@@ -123,16 +123,12 @@ namespace CrptoTrade.Assets
                 }
 
                 min = _data[0].Obj;
-                _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
-
-                _positionLookUp.Remove(min);
-                _data.RemoveAt(_highIndex--);
-                Heapify(0);
+                PostExtraction(min);
                 return true;
             }
         }
 
-        public bool TryPeek(out T val)
+        public bool TryPeekOrGet(Func<T, bool> getPredicate, out T val)
         {
             lock (_syncRoot)
             {
@@ -142,8 +138,20 @@ namespace CrptoTrade.Assets
                     return false;
                 }
                 val = _data[0].Obj;
+                if (getPredicate(val))
+                {
+                    PostExtraction(val);
+                }
                 return true;
             }
+        }
+
+        private void PostExtraction(T extractVal, int extractAt = 0)
+        {
+            _data[extractAt] = new PositionWrapped(_data[_highIndex].Obj, extractAt);
+            _positionLookUp.Remove(extractVal);
+            _data.RemoveAt(_highIndex--);
+            Heapify(extractAt);
         }
 
         private void Heapify(int startPos)
