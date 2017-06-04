@@ -7,7 +7,7 @@ namespace CrptoTrade.Assets
 
     public sealed class MinHeap<T> : AbsHeap<T> where T : IComparable<T>
     {
-        public MinHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 1000) : base(id, equalityComparer, initialCapax)
+        public MinHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024) : base(id, equalityComparer, initialCapax)
         {
         }
 
@@ -24,7 +24,7 @@ namespace CrptoTrade.Assets
 
     public sealed class MaxHeap<T> : AbsHeap<T> where T : IComparable<T>
     {
-        public MaxHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 1000) : base(id, equalityComparer, initialCapax)
+        public MaxHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024) : base(id, equalityComparer, initialCapax)
         {
         }
 
@@ -41,7 +41,6 @@ namespace CrptoTrade.Assets
 
     public abstract class AbsHeap<T>
     {
-        private readonly int _id;
         private int _highIndex;
         private readonly object _syncRoot = new object();
         private readonly List<PositionWrapped> _data;
@@ -49,13 +48,15 @@ namespace CrptoTrade.Assets
         //PartitionedDictionary ? => Not now!
         private readonly Dictionary<T, PositionWrapped> _positionLookUp;
 
-        protected AbsHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 1000)
+        protected AbsHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16*1024)
         {
-            _id = id;
+            Id = id;
             _data = new List<PositionWrapped>(initialCapax);
             _positionLookUp = new Dictionary<T, PositionWrapped>(initialCapax, equalityComparer);
             _highIndex = -1;
         }
+
+        public int Id { get; }
 
         public void Remove(T val)
         {
@@ -71,10 +72,9 @@ namespace CrptoTrade.Assets
                         var position = intervalVal.Position;
                         if (position != _highIndex)
                         {
-                            _data[position] = _data[_highIndex];
-                            _data[position].Position = position;
+                            _data[position] = new PositionWrapped(_data[_highIndex].Obj, position);
                             _data.RemoveAt(_highIndex);
-                            if (position != --_highIndex) MinHeapify(position);
+                            if (position != --_highIndex) Heapify(position);
                         }
                         else
                         {
@@ -91,33 +91,28 @@ namespace CrptoTrade.Assets
         {
             lock (_syncRoot)
             {
-                var wrapper = new PositionWrapped
-                {
-                    Position = _data.Count,
-                    Obj = newVal
-                };
+                var wrapper = new PositionWrapped(newVal, _data.Count);
                 _positionLookUp.Add(newVal, wrapper);
                 _data.Add(wrapper);
                 var current = ++_highIndex;
                 while (current > 0)
                 {
-                    var parent = (current - 1) >> 2;
+                    var parent = (current - 1) >> 1;
                     var parentVal = _data[parent];
                     if (StopBubbleUp(parentVal.Obj, newVal))
                     {
                         break;
                     }
-                    _data[current] = _data[parent];
-                    _data[current].Position = current;
-                    _data[parent] = wrapper;
+                    _data[current] = new PositionWrapped(_data[parent].Obj, current);
                     wrapper.Position = parent;
+                    _data[parent] = wrapper;
 
                     current = parent;
                 }
             }
         }
         
-        public bool TryExtractMin(out T min)
+        public bool TryGetRoot(out T min)
         {
             lock (_syncRoot)
             {
@@ -128,12 +123,11 @@ namespace CrptoTrade.Assets
                 }
 
                 min = _data[0].Obj;
-                _data[0] = _data[_highIndex];
-                _data[0].Position = 0;
+                _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
 
                 _positionLookUp.Remove(min);
                 _data.RemoveAt(_highIndex--);
-                MinHeapify(0);
+                Heapify(0);
                 return true;
             }
         }
@@ -152,7 +146,7 @@ namespace CrptoTrade.Assets
             }
         }
 
-        private void MinHeapify(int startPos)
+        private void Heapify(int startPos)
         {
             try
             {
@@ -162,7 +156,7 @@ namespace CrptoTrade.Assets
                 var current = startPos;
                 while (true)
                 {
-                    var l = (current << 2) + 1;
+                    var l = (current << 1) + 1;
                     var r = l + 1;
 
                     if (l < _data.Count && MustBubbleUp(_data[l].Obj, _data[current].Obj))
@@ -176,10 +170,8 @@ namespace CrptoTrade.Assets
 
                     if (current == startPos) break;
                     var tmp = _data[startPos];
-                    _data[startPos] = _data[current];
-                    _data[startPos].Position = startPos;
-                    _data[current] = tmp;
-                    _data[current].Position = current;
+                    _data[startPos] = new PositionWrapped(_data[current].Obj, startPos);
+                    _data[current] = new PositionWrapped(tmp.Obj, current);
                     startPos = current;
                 }
             }
@@ -188,10 +180,16 @@ namespace CrptoTrade.Assets
         protected abstract bool StopBubbleUp(T parent, T child);
         protected abstract bool MustBubbleUp(T child, T parent);
 
-        private class PositionWrapped
+        private struct PositionWrapped
         {
-            public T Obj { get; set; }
-            public int Position { get; set; }
+            public readonly T Obj;
+            public int Position;
+
+            public PositionWrapped(T obj, int pos)
+            {
+                Obj = obj;
+                Position = pos;
+            }
         }
     }
 }
