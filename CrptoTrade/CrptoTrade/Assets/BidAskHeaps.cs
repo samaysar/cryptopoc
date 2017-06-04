@@ -30,7 +30,7 @@ namespace CrptoTrade.Assets
         private readonly MinHeap<Quote>[] _minHeaps;
 
         public AskHeap(IReadOnlyCollection<MinHeap<Quote>> minHeaps)
-            : base(0, AbsHeap<Quote>.Equality, minHeaps.Count)
+            : base(0, 1, AbsHeap<Quote>.Equality, minHeaps.Count)
         {
             _minHeaps = new MinHeap<Quote>[minHeaps.Count];
             foreach (var minHeap in minHeaps)
@@ -41,23 +41,23 @@ namespace CrptoTrade.Assets
             }
         }
 
-        public void FindSizeAndPrice(TradePosition position)
+        public void FindSizeAndPrice(BuyPosition position)
         {
-            Heapify(heap =>
+            HeapifyUnsafe(heap =>
             {
                 //if quote is Zero, then it will b remove from Quote Heap
                 //and our heap will be reheapfied
                 return heap.Remove(quote =>
                 {
                     quote.AdjustBuyPosition(position);
-                    return quote.IsZero;
+                    return quote.Invalid;
                 });
             });
         }
 
         private void OnMinChanged(int id)
         {
-            Reheapify(_minHeaps[id]);
+            ReheapifyUnsafe(_minHeaps[id]);
         }
 
         protected override bool StopBubbleUp(MinHeap<Quote> parent, MinHeap<Quote> child)
@@ -76,7 +76,7 @@ namespace CrptoTrade.Assets
         private readonly MaxHeap<Quote>[] _maxHeaps;
 
         public BidHeap(IReadOnlyCollection<MaxHeap<Quote>> maxHeaps)
-            : base(0, AbsHeap<Quote>.Equality, maxHeaps.Count)
+            : base(0, -1, AbsHeap<Quote>.Equality, maxHeaps.Count)
         {
             _maxHeaps = new MaxHeap<Quote>[maxHeaps.Count];
             foreach (var maxHeap in maxHeaps)
@@ -87,23 +87,23 @@ namespace CrptoTrade.Assets
             }
         }
 
-        public void FindPriceAdjustSize(TradePosition position)
+        public void FindPriceAdjustSize(SellPosition position)
         {
-            Heapify(heap =>
+            HeapifyUnsafe(heap =>
             {
                 //if quote is Zero, then it will b remove from Quote Heap
                 //and our heap will be reheapfied
                 return heap.Remove(quote =>
                 {
                     quote.AdjustSellPosition(position);
-                    return quote.IsZero;
+                    return quote.Invalid;
                 });
             });
         }
 
         private void OnMaxChanged(int id)
         {
-            Reheapify(_maxHeaps[id]);
+            ReheapifyUnsafe(_maxHeaps[id]);
         }
 
         protected override bool StopBubbleUp(MaxHeap<Quote> parent, MaxHeap<Quote> child)

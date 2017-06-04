@@ -9,37 +9,30 @@ namespace CrptoTrade.Assets
         public static readonly IEqualityComparer<Quote> Equality = new QuoteEquality();
 
         //can we set it somewhr as const value?
-        private readonly double _minsize;
-        private int _units;
-        public readonly double Price;
+        public readonly decimal Minsize;
+        public readonly decimal Price;
         public readonly string Id;
 
-        public bool IsZero => _units == 0;
+        public int Units { get; private set; }
 
-        public Quote(double priceOfMinSize, double totalSize, string id, double minSize)
+        public bool Invalid => Units < 1;
+
+        public Quote(decimal priceOfMinSize, decimal totalSize, string id, decimal minSize)
         {
             Price = priceOfMinSize;
-            _units = (int) (totalSize / minSize);
+            Units = (int) (totalSize / minSize);
             Id = id;
-            _minsize = minSize;
+            Minsize = minSize;
         }
 
-        public void AdjustBuyPosition(TradePosition position)
+        public void AdjustBuyPosition(BuyPosition position)
         {
-            var tradableUnits = Math.Min((int) (position.Value / Price), _units);
-            _units -= tradableUnits;
-            position.Size = tradableUnits * _minsize;
-            position.Value -= (tradableUnits * Price);
-            position.Price = Price;
+            Units -= position.AdjustWithQuote(this);
         }
 
-        public void AdjustSellPosition(TradePosition position)
+        public void AdjustSellPosition(SellPosition position)
         {
-            var tradableUnits = Math.Min((int) (position.Size / _minsize), _units);
-            _units -= tradableUnits;
-            position.Size -= (tradableUnits * _minsize);
-            position.Value += (tradableUnits * Price);
-            position.Price = Price;
+            Units -= position.AdjustWithQuote(this);
         }
 
         public int CompareTo(Quote other)

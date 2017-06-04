@@ -4,11 +4,13 @@ using System.Collections.Generic;
 namespace CrptoTrade.Assets
 {
     public delegate void MinChangeHandler(int id);
+
     //We need to have IComparable<T> on Bid/Ask price and IEquatable<T> on the identifier, if any (for streaming data REMOVAL purpose)
 
     public sealed class MinHeap<T> : AbsHeap<T> where T : IComparable<T>
     {
-        public MinHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024) : base(id, equalityComparer, initialCapax)
+        public MinHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024)
+            : base(id, 1, equalityComparer, initialCapax)
         {
         }
 
@@ -45,7 +47,8 @@ namespace CrptoTrade.Assets
 
     public sealed class MaxHeap<T> : AbsHeap<T> where T : IComparable<T>
     {
-        public MaxHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024) : base(id, equalityComparer, initialCapax)
+        public MaxHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024)
+            : base(id, -1, equalityComparer, initialCapax)
         {
         }
 
@@ -82,6 +85,7 @@ namespace CrptoTrade.Assets
 
     public abstract class AbsHeap<T> : IComparable<AbsHeap<T>> where T : IComparable<T>
     {
+        private readonly int _emptyDefault;
         public static readonly IEqualityComparer<AbsHeap<T>> Equality = new AbsHeapEquality();
         private int _highIndex;
         private readonly object _syncRoot = new object();
@@ -90,9 +94,10 @@ namespace CrptoTrade.Assets
         //PartitionedDictionary ? => Not now!
         private readonly Dictionary<T, PositionWrapped> _positionLookUp;
         public event MinChangeHandler RootChanged = x => { };
-        
-        protected AbsHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16*1024)
+
+        protected AbsHeap(int id, int emptyDefault, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024)
         {
+            _emptyDefault = emptyDefault;
             Id = id;
             _data = new List<PositionWrapped>(initialCapax);
             _positionLookUp = new Dictionary<T, PositionWrapped>(initialCapax, equalityComparer);
@@ -130,17 +135,18 @@ namespace CrptoTrade.Assets
             }
         }
 
-        protected void Reheapify(T val)
+        protected void ReheapifyUnsafe(T val)
         {
-            lock (_syncRoot)
+            if (_positionLookUp.TryGetValue(val, out PositionWrapped wrapper))
             {
-                try
+                lock (_syncRoot)
                 {
-                }
-                finally
-                {
-                    if (_positionLookUp.TryGetValue(val, out PositionWrapped wrapper))
+                    try
                     {
+                    }
+                    finally
+                    {
+
                         var current = wrapper.Position;
                         //we need to do BOTH bubbleUP and DOWN as we dont know whats the new value
                         //but as we know values are continously changing behind the scene
@@ -169,7 +175,7 @@ namespace CrptoTrade.Assets
 
         protected void Insert(T newVal)
         {
-            var current = -1;
+            int current;
             lock (_syncRoot)
             {
                 try
@@ -225,12 +231,14 @@ namespace CrptoTrade.Assets
             return true;
         }
 
-        protected void Heapify(Func<T, bool> predicate)
+        protected void HeapifyUnsafe(Func<T, bool> predicate)
         {
             lock (_syncRoot)
             {
-                if (_highIndex < 0 || !predicate(_data[0].Obj)) return;
-                Heapify(0);
+                if (predicate(_data[0].Obj))
+                {
+                    Heapify(0);
+                }
             }
         }
 
@@ -245,7 +253,7 @@ namespace CrptoTrade.Assets
                 _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
                 _positionLookUp.Remove(val);
                 _data.RemoveAt(_highIndex--);
-                Heapify(0);
+                if (_highIndex > 0) Heapify(0);
             }
             return true;
         }
@@ -294,7 +302,7 @@ namespace CrptoTrade.Assets
             lock (_syncRoot)
             {
                 //we need to compare "GIVEN" value to our value!!!
-                return _highIndex < 0 ? 1 : val.CompareTo(_data[0].Obj);
+                return _highIndex < 0 ? -_emptyDefault : val.CompareTo(_data[0].Obj);
             }
         }
 
@@ -308,7 +316,10 @@ namespace CrptoTrade.Assets
             T myVal;
             lock (_syncRoot)
             {
-                if (_highIndex < 0) return -1;
+                if (_highIndex < 0)
+                {
+                    return _emptyDefault;
+                }
                 myVal = _data[0].Obj;
             }
             //!!! ALWAYS OUTSIDE OF LOCK... else DEADLOCK can happen
