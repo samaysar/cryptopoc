@@ -271,9 +271,10 @@ namespace CrptoTrade.Trading
 
             private static decimal GetSize(JObject jsonQuote)
             {
-                return jsonQuote.GetValue("size").Value<string>().TryTo(out decimal size)
-                    ? size
-                    : jsonQuote.GetValue("remaining_size").Value<string>().ToDecimal();
+                var size = jsonQuote.GetValue("size")?.Value<string>();
+                return string.IsNullOrWhiteSpace(size)
+                    ? jsonQuote.GetValue("remaining_size").Value<string>().ToDecimal()
+                    : size.ToDecimal();
             }
 
             private static string GetOrderId(JObject jsonQuote)

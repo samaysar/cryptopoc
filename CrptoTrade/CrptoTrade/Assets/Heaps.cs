@@ -126,7 +126,8 @@ namespace CrptoTrade.Assets
                         var position = intervalVal.Position;
                         if (position != _highIndex)
                         {
-                            _data[position] = new PositionWrapped(_data[_highIndex].Obj, position);
+                            _data[position] = _data[_highIndex];
+                            _data[_highIndex].Position = position;
                             _data.RemoveAt(_highIndex);
                             if (position != --_highIndex) Heapify(position);
                         }
@@ -156,7 +157,8 @@ namespace CrptoTrade.Assets
                         var position = intervalVal.Position;
                         if (position != _highIndex)
                         {
-                            _data[position] = new PositionWrapped(_data[_highIndex].Obj, position);
+                            _data[position] = _data[_highIndex];
+                            _data[_highIndex].Position = position;
                             _data.RemoveAt(_highIndex);
                             if (position != --_highIndex) Heapify(position);
                         }
@@ -197,9 +199,10 @@ namespace CrptoTrade.Assets
                             {
                                 break;
                             }
-                            _data[current] = new PositionWrapped(parentVal.Obj, current);
-                            wrapper.Position = parent;
+                            _data[current] = parentVal;
+                            parentVal.Position = current;
                             _data[parent] = wrapper;
+                            wrapper.Position = parent;
 
                             current = parent;
                         }
@@ -231,9 +234,10 @@ namespace CrptoTrade.Assets
                         {
                             break;
                         }
-                        _data[current] = new PositionWrapped(parentVal.Obj, current);
-                        wrapper.Position = parent;
+                        _data[current] = parentVal;
+                        parentVal.Position = current;
                         _data[parent] = wrapper;
+                        wrapper.Position = parent;
 
                         current = parent;
                     }
@@ -259,7 +263,8 @@ namespace CrptoTrade.Assets
                 val = _data[0].Obj;
                 if (!predicate(val)) return false;
                 if (!extractIfPredicate) return true;
-                _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
+                _data[0] = _data[_highIndex];
+                _data[0].Position = 0;
                 _positionLookUp.Remove(val);
                 _data.RemoveAt(_highIndex--);
                 Heapify(0);
@@ -286,7 +291,8 @@ namespace CrptoTrade.Assets
                 if (_highIndex < 0) return false;
                 var val = _data[0].Obj;
                 if (!predicate(val)) return false;
-                _data[0] = new PositionWrapped(_data[_highIndex].Obj, 0);
+                _data[0] = _data[_highIndex];
+                _data[0].Position = 0;
                 _positionLookUp.Remove(val);
                 _data.RemoveAt(_highIndex--);
                 if (_highIndex > 0) Heapify(0);
@@ -326,8 +332,10 @@ namespace CrptoTrade.Assets
 
                     if (current == startPos) break;
                     var tmp = _data[startPos];
-                    _data[startPos] = new PositionWrapped(_data[current].Obj, startPos);
-                    _data[current] = new PositionWrapped(tmp.Obj, current);
+                    _data[startPos] = _data[current];
+                    _data[startPos].Position = startPos;
+                    _data[current] = tmp;
+                    tmp.Position = current;
                     startPos = current;
                 }
             }
@@ -366,7 +374,7 @@ namespace CrptoTrade.Assets
             return other.GivenCompareToRoot(myVal);
         }
 
-        private struct PositionWrapped
+        private class PositionWrapped
         {
             public readonly T Obj;
             public int Position;
