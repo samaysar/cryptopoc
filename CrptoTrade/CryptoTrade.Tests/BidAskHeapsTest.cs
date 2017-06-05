@@ -22,9 +22,9 @@ namespace CryptoTrade.Tests
             var arr3 = new Quote[1025];
             Populate(arr3);
 
-            var quote1 = new Quote(0.5m, 1, Guid.NewGuid().ToString(), 1, null);
-            var quote2 = new Quote(0.6m, 1, Guid.NewGuid().ToString(), 1, null);
-            var quote3 = new Quote(0.7m, 1, Guid.NewGuid().ToString(), 1, null);
+            var quote1 = new Quote(0.5m, 1, Guid.NewGuid().ToString(), 1, null, 1);
+            var quote2 = new Quote(0.6m, 1, Guid.NewGuid().ToString(), 1, null, 1);
+            var quote3 = new Quote(0.7m, 1, Guid.NewGuid().ToString(), 1, null, 1);
 
             var fullArray = new Quote[size + 3];
             Array.Copy(arr1, 0, fullArray, 0, arr1.Length);
@@ -34,7 +34,7 @@ namespace CryptoTrade.Tests
             fullArray[fullArray.Length - 2] = quote2;
             fullArray[fullArray.Length - 1] = quote3;
 
-            fullArray = fullArray.OrderBy(x => x.Price).ToArray();
+            fullArray = fullArray.OrderBy(x => x.QuotePrice).ToArray();
 
             var heaps = new[]
             {
@@ -47,21 +47,21 @@ namespace CryptoTrade.Tests
             heaps[1].InsertVal(quote2);
             heaps[2].InsertVal(quote3);
 
-            var position = new BuyPosition(fullArray.Sum(x => x.Price));
+            var position = new BuyPosition(fullArray.Sum(x => x.QuotePrice));
             var sw = Stopwatch.StartNew();
             Parallel.For(0, 1, i =>
             {
                 var cnt = 0;
                 do
                 {
-                    //position.LastSize = 0;
+                    position.LastSize = 0;
                     askHeap.FindSizeAndPrice(position);
-                    //Assert.True(fullArray[cnt].Price.Equals(position.LastPrice));
+                    Assert.True(fullArray[cnt].QuotePrice.Equals(position.LastPrice));
                 } while (++cnt < fullArray.Length);
 
-                //position.LastSize = 0;
-                //askHeap.FindSizeAndPrice(position);
-                //Assert.True(position.LastSize.Equals(0));
+                position.LastSize = 0;
+                askHeap.FindSizeAndPrice(position);
+                Assert.True(position.LastSize.Equals(0));
             });
             sw.Stop();
             Console.Out.WriteLine($"AskHeap Extract Time:{sw.Elapsed.TotalMilliseconds}");
@@ -78,9 +78,9 @@ namespace CryptoTrade.Tests
             var arr3 = new Quote[1025];
             Populate(arr3);
 
-            var quote1 = new Quote(0.5m, 1, Guid.NewGuid().ToString(), 1, null);
-            var quote2 = new Quote(0.6m, 1, Guid.NewGuid().ToString(), 1, null);
-            var quote3 = new Quote(0.7m, 1, Guid.NewGuid().ToString(), 1, null);
+            var quote1 = new Quote(0.5m, 1, Guid.NewGuid().ToString(), 1, null,1);
+            var quote2 = new Quote(0.6m, 1, Guid.NewGuid().ToString(), 1, null, 1);
+            var quote3 = new Quote(0.7m, 1, Guid.NewGuid().ToString(), 1, null, 1);
 
             var fullArray = new Quote[size + 3];
             Array.Copy(arr1, 0, fullArray, 0, arr1.Length);
@@ -90,7 +90,7 @@ namespace CryptoTrade.Tests
             fullArray[fullArray.Length - 2] = quote2;
             fullArray[fullArray.Length - 1] = quote3;
 
-            fullArray = fullArray.OrderByDescending(x => x.Price).ToArray();
+            fullArray = fullArray.OrderByDescending(x => x.QuotePrice).ToArray();
 
             var heaps = new[]
             {
@@ -110,14 +110,14 @@ namespace CryptoTrade.Tests
                 var cnt = 0;
                 do
                 {
-                    //position.LastSize = 0;
+                    position.LastSize = 0;
                     askHeap.FindPriceAdjustSize(position);
-                    //Assert.True(fullArray[cnt].Price.Equals(position.LastPrice));
+                    Assert.True(fullArray[cnt].QuotePrice.Equals(position.LastPrice));
                 } while (++cnt < fullArray.Length);
 
-                //position.LastSize = 0;
-                //askHeap.FindPriceAdjustSize(position);
-                //Assert.True(position.LastSize.Equals(0));
+                position.LastSize = 0;
+                askHeap.FindPriceAdjustSize(position);
+                Assert.True(position.LastSize.Equals(0));
             });
             sw.Stop();
             Console.Out.WriteLine($"AskHeap Extract Time:{sw.Elapsed.TotalMilliseconds}");
@@ -132,7 +132,7 @@ namespace CryptoTrade.Tests
             }, i =>
             {
                 arr[i] = new Quote((new decimal((int) (ran.NextDouble() / 0.00000001)) * 0.00000001m) + 1, 1,
-                    Guid.NewGuid().ToString(), 1, null);
+                    Guid.NewGuid().ToString(), 1, null, 1);
             });
         }
 

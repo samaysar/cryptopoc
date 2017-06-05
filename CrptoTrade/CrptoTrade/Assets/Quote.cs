@@ -12,32 +12,60 @@ namespace CrptoTrade.Assets
         public static readonly IEqualityComparer<Quote> Equality = new QuoteEquality();
 
         //can we set it somewhr as const value?
-        public readonly decimal Minsize;
-        public readonly decimal Price;
+        public readonly decimal MinSize;
+        public readonly decimal MinDollar;
+        public readonly decimal Stepsize;
+        public readonly decimal QuotePrice;
         public readonly string Id;
 
-        public int Units { get; private set; }
+        public decimal QuoteSize { get; private set; }
 
-        public bool Invalid => Units < 1;
+        public bool Invalid => QuoteSize <= 0;
 
-        public Quote(decimal priceOfMinSize, decimal totalSize, string id, decimal minSize,
-            ITrader quoteTrader)
+        public Quote(decimal quotePrice, decimal totalSize, string id, decimal stepSize,
+            ITrader quoteTrader, decimal minSize = 0.01m)
         {
-            Price = priceOfMinSize;
-            Units = (int) (totalSize / minSize);
             Id = id;
-            Minsize = minSize;
+            QuotePrice = quotePrice;
+            QuoteSize = totalSize;
+            Stepsize = stepSize;
+            MinDollar = minSize * quotePrice;
+            MinSize = minSize;
             _quoteTrader = quoteTrader;
         }
 
         public void AdjustBuyPosition(BuyPosition position)
         {
-            Units -= position.AdjustWithQuote(this, _quoteTrader);
+            if (position.AdjustWithQuote(this, _quoteTrader) >= QuoteSize)
+            {
+                //we reduce the unit ONLY if the buy position can
+                //completely settle it
+                //becoz the my trade is either going to consume it on the
+                //XCHG thus, it would disappear else someone already
+                //consumed it, thus DONE notif is anyway on its way in both cases
+
+                //if my trade is partially consuming it and I modify the quantity
+                //then I have to take extra precautions on notification when adjusting its size
+                //let the notif do its work.
+                QuoteSize = 0;
+            }
         }
 
         public void AdjustSellPosition(SellPosition position)
         {
-            Units -= position.AdjustWithQuote(this, _quoteTrader);
+            if (position.AdjustWithQuote(this, _quoteTrader) >= QuoteSize)
+            {
+                //we reduce the unit ONLY if the buy position can
+                //completely settle it
+                //becoz the my trade is either going to consume it on the
+                //XCHG thus, it would disappear else someone already
+                //consumed it, thus DONE notif is anyway on its way in both cases
+
+                //if my trade is partially consuming it and I modify the quantity
+                //then I have to take extra precautions on notification when adjusting its size
+                //let the notif do its work.
+                QuoteSize = 0;
+            }
         }
 
         public int CompareTo(Quote other)
@@ -45,7 +73,7 @@ namespace CrptoTrade.Assets
             //we DONT check for ref equality, its OK as price is READONLY
             return ReferenceEquals(null, other)
                 ? 1
-                : Price.CompareTo(other.Price);
+                : QuotePrice.CompareTo(other.QuotePrice);
         }
 
         private class QuoteEquality : IEqualityComparer<Quote>

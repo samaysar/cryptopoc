@@ -25,18 +25,27 @@ namespace CrptoTrade.Assets
             }
         }
 
-        public int AdjustWithQuote(Quote quote, IBuyer quoteBuyer)
+        public decimal AdjustWithQuote(Quote quote, IBuyer quoteBuyer)
         {
-            int tradableUnits;
+            LastSize = 0;
             lock (_syncRoot)
             {
-                tradableUnits = Math.Min((int) (_value / quote.Price), quote.Units);
-                _value -= (tradableUnits * quote.Price);
+                if (_value >= quote.MinDollar)
+                {
+                    LastSize = quote.MinSize;
+                    var quoteSatoshi = (int)((quote.QuoteSize - quote.MinSize) / quote.Stepsize);
+                    if (quoteSatoshi > 0)
+                    {
+                        var extraSatoshi = (int) ((_value - quote.MinDollar) / (quote.QuotePrice * quote.Stepsize));
+                        var satoshiSize = Math.Min(extraSatoshi, quoteSatoshi) * quote.Stepsize;
+                        LastSize += satoshiSize;
+                    }
+                    _value -= (LastSize * quote.QuotePrice);
+                }
             }            
-            LastSize = tradableUnits * quote.Minsize;
-            LastPrice = quote.Price;
+            LastPrice = quote.QuotePrice;
             _lastBuyer = quoteBuyer;
-            return tradableUnits;
+            return LastSize;
         }
 
         public Task ExecuteLastAsync()
@@ -66,18 +75,27 @@ namespace CrptoTrade.Assets
             }
         }
 
-        public int AdjustWithQuote(Quote quote, ISeller quoteSeller)
+        public decimal AdjustWithQuote(Quote quote, ISeller quoteSeller)
         {
-            int tradableUnits;
+            LastSize = 0;
             lock (_syncRoot)
             {
-                tradableUnits = Math.Min((int) (_totalSize / quote.Minsize), quote.Units);
-                LastSize = tradableUnits * quote.Minsize;
-                _totalSize -= LastSize;
+                if (_totalSize >= quote.MinSize)
+                {
+                    LastSize = quote.MinSize;
+                    var quoteSatoshi = (int)((quote.QuoteSize - quote.MinSize) / quote.Stepsize);
+                    if (quoteSatoshi > 0)
+                    {
+                        var extraSatoshi = (int) ((_totalSize - quote.MinSize) / quote.Stepsize);
+                        var satoshiSize = Math.Min(extraSatoshi, quoteSatoshi) * quote.Stepsize;
+                        LastSize += satoshiSize;
+                    }
+                    _totalSize -= LastSize;
+                }
             }
-            LastPrice = quote.Price;
+            LastPrice = quote.QuotePrice;
             _lastSeller = quoteSeller;
-            return tradableUnits;
+            return LastSize;
         }
 
         public Task ExecuteLastAsync()
