@@ -50,22 +50,22 @@ namespace CrptoTrade.Trading
             _authClient = authClient;
             _id = id;
             var btcTrader = new GdaxTrader(this, "BTC-USD", MinSize, StepSize, id, initialCapex);
-            //var ethTrader = new GdaxTrader(this, "ETH-USD", MinSize, StepSize, id, initialCapex);
-            //var ltcTrader = new GdaxTrader(this, "LTC-USD", MinSize, StepSize, id, initialCapex);
+            var ethTrader = new GdaxTrader(this, "ETH-USD", MinSize, StepSize, id, initialCapex);
+            var ltcTrader = new GdaxTrader(this, "LTC-USD", MinSize, StepSize, id, initialCapex);
             _heapLookup = new Dictionary<CryptoCurrency, GdaxTrader>
             {
                 {CryptoCurrency.Btc, btcTrader},
-                //{CryptoCurrency.Eth, ethTrader},
-                //{CryptoCurrency.Ltc, ltcTrader}
+                {CryptoCurrency.Eth, ethTrader},
+                {CryptoCurrency.Ltc, ltcTrader}
             };
             _sockets = new[]
             {
                 new QuoteSocket("wss://ws-feed.gdax.com", @"{""type"": ""subscribe"",""product_ids"": [""BTC-USD""]}",
                     btcTrader).Start(),
-                //new QuoteSocket("wss://ws-feed.gdax.com", @"{""type"": ""subscribe"",""product_ids"": [""ETH-USD""]}",
-                //    ethTrader).Start(),
-                //new QuoteSocket("wss://ws-feed.gdax.com", @"{""type"": ""subscribe"",""product_ids"": [""LTC-USD""]}",
-                //    ltcTrader).Start()
+                new QuoteSocket("wss://ws-feed.gdax.com", @"{""type"": ""subscribe"",""product_ids"": [""ETH-USD""]}",
+                    ethTrader).Start(),
+                new QuoteSocket("wss://ws-feed.gdax.com", @"{""type"": ""subscribe"",""product_ids"": [""LTC-USD""]}",
+                    ltcTrader).Start()
             };
         }
 
