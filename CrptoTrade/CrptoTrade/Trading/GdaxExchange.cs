@@ -35,7 +35,8 @@ namespace CrptoTrade.Trading
                 Remains = 0,
                 TradeSize = size,
                 DollarValue = size * price,
-                TimeInMilliSec = ((int)(sw.Elapsed.TotalMilliseconds * 1000))/1000.0m
+                Quote = price,
+                MsTime = ((int)(sw.Elapsed.TotalMilliseconds * 1000))/1000.0m
             };
         }
     }
@@ -139,7 +140,7 @@ namespace CrptoTrade.Trading
                 Remains = size - traded,
                 TradeSize = traded,
                 DollarValue = traded * price,
-                TimeInMilliSec = ((int)(sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m
+                MsTime = ((int)(sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m
             };
         }
 

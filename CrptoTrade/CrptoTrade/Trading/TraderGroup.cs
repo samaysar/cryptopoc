@@ -58,10 +58,10 @@ namespace CrptoTrade.Trading
             }
             sw.Stop();
 
-            response.FinalRemains = $"{decimal.Round(buy.Current, 8)}";
-            response.TotalDollarValue = dollarVal.ToString("N");
-            response.TotalTradeSize = $"{tradeSize}";
-            response.TotalTimeInMiiliSec = ((int) (sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
+            response.Untraded = $"{decimal.Round(buy.Current, 2)}";
+            response.TotalValue = dollarVal.ToString("N");
+            response.TotalTraded = $"{tradeSize}";
+            response.MsTime = ((int) (sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
             return response;
         }
 
@@ -122,10 +122,10 @@ namespace CrptoTrade.Trading
             }
             sw.Stop();
 
-            response.FinalRemains = $"{decimal.Round(sell.Current, 8)}";
-            response.TotalDollarValue = dollarVal.ToString("N");
-            response.TotalTradeSize = $"{tradeSize}";
-            response.TotalTimeInMiiliSec = ((int)(sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
+            response.Untraded = $"{decimal.Round(sell.Current, 8)}";
+            response.TotalValue = dollarVal.ToString("N");
+            response.TotalTraded = $"{tradeSize}";
+            response.MsTime = ((int)(sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
             return response;
         }
     }

@@ -7,24 +7,25 @@ namespace CrptoTrade.Trading
         public decimal Remains;
         public decimal Initial;
         public decimal TradeSize;
+        public decimal Quote;
         public decimal DollarValue;
-        public decimal TimeInMilliSec;
+        public decimal MsTime;
 
         public string Summary(int position)
         {
             return
-                $"Trade-{position} => Initial={Initial},Traded={TradeSize},Remain:{Remains},$={DollarValue},MilliSecTime:{TimeInMilliSec}";
+                $"Trade-{position} => Initial={Initial},Untraded:{Remains},Traded={TradeSize},Quote={Quote},$={decimal.Round(DollarValue, 2)},MsTime:{MsTime}";
         }
     }
 
     public class TradeResponse
     {
-        public string TotalTradeSize;
-        public string TotalDollarValue;
-        public string FinalRemains;
         public string Initial;
+        public string Untraded;
+        public string TotalTraded;
+        public string TotalValue;
+        public decimal MsTime;
         public List<string> TradeSummary;
-        public decimal TotalTimeInMiiliSec;
         public string Error;
     }
 }

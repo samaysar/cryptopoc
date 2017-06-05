@@ -64,7 +64,9 @@ namespace CrptoTrade
             var currencyEnum = (CryptoCurrency) currency;
             var result = await _factory.GetTrader(currencyEnum).TradeAsync(new BuyPosition(dollarAmount))
                 .ConfigureAwait(false);
-            result.TotalTradeSize += $" {currencyEnum}";
+            result.Initial += " $";
+            result.Untraded += " $";
+            result.TotalTraded += $" {currencyEnum}";
 
             return result;
         }
@@ -84,8 +86,8 @@ namespace CrptoTrade
             var result = await _factory.GetTrader(currencyEnum).TradeAsync(new SellPosition(currencyAmount))
                 .ConfigureAwait(false);
             result.Initial += $" {currencyEnum}";
-            result.FinalRemains += $" {currencyEnum}";
-            result.TotalTradeSize += $" {currencyEnum}";
+            result.Untraded += $" {currencyEnum}";
+            result.TotalTraded += $" {currencyEnum}";
 
             return result;
         }
