@@ -29,10 +29,10 @@ namespace CrptoTrade.Assets
             if (_value >= quote.MinDollar)
             {
                 LastSize = quote.MinSize;
-                var quoteSatoshi = (int) ((quote.QuoteSize - quote.MinSize) / quote.Stepsize);
+                var quoteSatoshi = decimal.Floor((quote.QuoteSize - quote.MinSize) / quote.Stepsize);
                 if (quoteSatoshi > 0)
                 {
-                    var extraSatoshi = (int) ((_value - quote.MinDollar) / (quote.QuotePrice * quote.Stepsize));
+                    var extraSatoshi = decimal.Floor((_value - quote.MinDollar) / (quote.QuotePrice * quote.Stepsize));
                     var satoshiSize = Math.Min(extraSatoshi, quoteSatoshi) * quote.Stepsize;
                     LastSize += satoshiSize;
                 }
@@ -69,10 +69,10 @@ namespace CrptoTrade.Assets
             if (_totalSize >= quote.MinSize)
             {
                 LastSize = quote.MinSize;
-                var quoteSatoshi = (int) ((quote.QuoteSize - quote.MinSize) / quote.Stepsize);
+                var quoteSatoshi = decimal.Floor((quote.QuoteSize - quote.MinSize) / quote.Stepsize);
                 if (quoteSatoshi > 0)
                 {
-                    var extraSatoshi = (int) ((_totalSize - quote.MinSize) / quote.Stepsize);
+                    var extraSatoshi = decimal.Floor((_totalSize - quote.MinSize) / quote.Stepsize);
                     var satoshiSize = Math.Min(extraSatoshi, quoteSatoshi) * quote.Stepsize;
                     LastSize += satoshiSize;
                 }
