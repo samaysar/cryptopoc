@@ -14,17 +14,17 @@ namespace CryptoTrade.Tests
         [Test]
         public void Ask_Heap_Latency()
         {
-            const int size = 1024*1024;
-            var arr1 = new Quote[128*1024];
+            const int size = 1024 * 1024;
+            var arr1 = new Quote[128 * 1024];
             Populate(arr1);
-            var arr2 = new Quote[(1024-129)*1024-1];
+            var arr2 = new Quote[(1024 - 129) * 1024 - 1];
             Populate(arr2);
             var arr3 = new Quote[1025];
             Populate(arr3);
 
-            var quote1 = new Quote(0.5m, 1, Guid.NewGuid().ToString(), 1);
-            var quote2 = new Quote(0.6m, 1, Guid.NewGuid().ToString(), 1);
-            var quote3 = new Quote(0.7m, 1, Guid.NewGuid().ToString(), 1);
+            var quote1 = new Quote(0.5m, 1, Guid.NewGuid().ToString(), 1, null);
+            var quote2 = new Quote(0.6m, 1, Guid.NewGuid().ToString(), 1, null);
+            var quote3 = new Quote(0.7m, 1, Guid.NewGuid().ToString(), 1, null);
 
             var fullArray = new Quote[size + 3];
             Array.Copy(arr1, 0, fullArray, 0, arr1.Length);
@@ -38,9 +38,9 @@ namespace CryptoTrade.Tests
 
             var heaps = new[]
             {
-                CreateMinHeap(arr1,0),
-                CreateMinHeap(arr2,1),
-                CreateMinHeap(arr3,2)
+                CreateMinHeap(arr1, 0),
+                CreateMinHeap(arr2, 1),
+                CreateMinHeap(arr3, 2)
             };
             var askHeap = new AskHeap(heaps);
             heaps[0].InsertVal(quote1);
@@ -78,9 +78,9 @@ namespace CryptoTrade.Tests
             var arr3 = new Quote[1025];
             Populate(arr3);
 
-            var quote1 = new Quote(0.5m, 1, Guid.NewGuid().ToString(), 1);
-            var quote2 = new Quote(0.6m, 1, Guid.NewGuid().ToString(), 1);
-            var quote3 = new Quote(0.7m, 1, Guid.NewGuid().ToString(), 1);
+            var quote1 = new Quote(0.5m, 1, Guid.NewGuid().ToString(), 1, null);
+            var quote2 = new Quote(0.6m, 1, Guid.NewGuid().ToString(), 1, null);
+            var quote3 = new Quote(0.7m, 1, Guid.NewGuid().ToString(), 1, null);
 
             var fullArray = new Quote[size + 3];
             Array.Copy(arr1, 0, fullArray, 0, arr1.Length);
@@ -94,9 +94,9 @@ namespace CryptoTrade.Tests
 
             var heaps = new[]
             {
-                CreateMaxHeap(arr1,0),
-                CreateMaxHeap(arr2,1),
-                CreateMaxHeap(arr3,2)
+                CreateMaxHeap(arr1, 0),
+                CreateMaxHeap(arr2, 1),
+                CreateMaxHeap(arr3, 2)
             };
             var askHeap = new BidHeap(heaps);
             heaps[0].InsertVal(quote1);
@@ -131,7 +131,8 @@ namespace CryptoTrade.Tests
                 MaxDegreeOfParallelism = Environment.ProcessorCount
             }, i =>
             {
-                arr[i] = new Quote((new decimal((int)(ran.NextDouble()/0.00000001))* 0.00000001m) + 1, 1, Guid.NewGuid().ToString(), 1);
+                arr[i] = new Quote((new decimal((int) (ran.NextDouble() / 0.00000001)) * 0.00000001m) + 1, 1,
+                    Guid.NewGuid().ToString(), 1, null);
             });
         }
 

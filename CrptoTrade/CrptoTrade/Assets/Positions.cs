@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
+using CrptoTrade.Trading;
 
 namespace CrptoTrade.Assets
 {
     public class BuyPosition
     {
         private readonly object _syncRoot = new object();
+        private IBuyer _lastBuyer;
         private decimal _value;
         public decimal LastSize;
         public decimal LastPrice;
@@ -22,7 +25,7 @@ namespace CrptoTrade.Assets
             }
         }
 
-        public int AdjustWithQuote(Quote quote)
+        public int AdjustWithQuote(Quote quote, IBuyer quoteBuyer)
         {
             int tradableUnits;
             lock (_syncRoot)
@@ -32,7 +35,13 @@ namespace CrptoTrade.Assets
             }            
             LastSize = tradableUnits * quote.Minsize;
             LastPrice = quote.Price;
+            _lastBuyer = quoteBuyer;
             return tradableUnits;
+        }
+
+        public Task ExecuteLastAsync()
+        {
+            return _lastBuyer.BuyAsync(LastSize, LastPrice);
         }
     }
 
@@ -40,6 +49,7 @@ namespace CrptoTrade.Assets
     {
         private readonly object _syncRoot = new object();
         private decimal _totalSize;
+        private ISeller _lastSeller;
         public decimal LastSize;
         public decimal LastPrice;
 
@@ -56,7 +66,7 @@ namespace CrptoTrade.Assets
             }
         }
 
-        public int AdjustWithQuote(Quote quote)
+        public int AdjustWithQuote(Quote quote, ISeller quoteSeller)
         {
             int tradableUnits;
             lock (_syncRoot)
@@ -66,7 +76,13 @@ namespace CrptoTrade.Assets
                 _totalSize -= LastSize;
             }
             LastPrice = quote.Price;
+            _lastSeller = quoteSeller;
             return tradableUnits;
+        }
+
+        public Task ExecuteLastAsync()
+        {
+            return _lastSeller.SellAsync(LastSize, LastPrice);
         }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CrptoTrade.Trading;
 
 namespace CrptoTrade.Assets
 {
     public class Quote : IComparable<Quote>
     {
+        private readonly ITrader _quoteTrader;
+
         //we go low on GC
         public static readonly IEqualityComparer<Quote> Equality = new QuoteEquality();
 
@@ -17,22 +20,24 @@ namespace CrptoTrade.Assets
 
         public bool Invalid => Units < 1;
 
-        public Quote(decimal priceOfMinSize, decimal totalSize, string id, decimal minSize)
+        public Quote(decimal priceOfMinSize, decimal totalSize, string id, decimal minSize,
+            ITrader quoteTrader)
         {
             Price = priceOfMinSize;
             Units = (int) (totalSize / minSize);
             Id = id;
             Minsize = minSize;
+            _quoteTrader = quoteTrader;
         }
 
         public void AdjustBuyPosition(BuyPosition position)
         {
-            Units -= position.AdjustWithQuote(this);
+            Units -= position.AdjustWithQuote(this, _quoteTrader);
         }
 
         public void AdjustSellPosition(SellPosition position)
         {
-            Units -= position.AdjustWithQuote(this);
+            Units -= position.AdjustWithQuote(this, _quoteTrader);
         }
 
         public int CompareTo(Quote other)
