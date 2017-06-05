@@ -8,12 +8,12 @@ namespace CrptoTrade.Trading
         public decimal Initial;
         public decimal TradeSize;
         public decimal DollarValue;
-        public int TimeInMicroSec;
+        public decimal TimeInMilliSec;
 
         public string Summary(int position)
         {
             return
-                $"Trade-{position} => Initial={Initial},Traded={TradeSize},Remain:{Remains},$={DollarValue},MilliSecTime:{TimeInMicroSec / 1000.0m}";
+                $"Trade-{position} => Initial={Initial},Traded={TradeSize},Remain:{Remains},$={DollarValue},MilliSecTime:{TimeInMilliSec / 1000.0m}";
         }
     }
 

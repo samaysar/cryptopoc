@@ -14,8 +14,7 @@ namespace CryptoTrade.Tests
         [Test]
         public void Tt()
         {
-            Console.Out.WriteLine(
-$@"{{""size"": ""{1.1} "",""price"": ""{0.00000001m} "",""side"": ""{"buy"} "",""product_id"": ""{"usd-us"} "",""time_in_force"":""IOC""}}");
+            Console.Out.WriteLine(decimal.Round(9.9699998076000000m, 2));
         }
 
         [Test]

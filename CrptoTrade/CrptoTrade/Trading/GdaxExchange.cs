@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CrptoTrade.Assets;
@@ -24,14 +25,17 @@ namespace CrptoTrade.Trading
 
         protected override async Task<TradeInfo> TradeAsync(decimal size, decimal price, string ticker, bool buySide)
         {
+            var sw = Stopwatch.StartNew();
             //we sleep for a while to simulate
             await Task.Delay(_delay.Next(1, 10)).ConfigureAwait(false);
+            sw.Stop();
             return new TradeInfo
             {
                 Initial = size,
                 Remains = 0,
                 TradeSize = size,
-                DollarValue = size * price
+                DollarValue = size * price,
+                TimeInMilliSec = ((int)(sw.Elapsed.TotalMilliseconds * 1000))/1000.0m
             };
         }
     }
@@ -111,6 +115,8 @@ namespace CrptoTrade.Trading
             //}
 
             string id;
+            decimal traded;
+            var sw = Stopwatch.StartNew();
             var trdData =
                 $@"{{""size"": ""{size}"",""price"": ""{price}"",""side"": ""{GetSide(buySide)}"",""product_id"": ""{ticker}"",""time_in_force"":""IOC""}}";
             using (var response = await _authClient.PostAsync("/orders", new StringContent(trdData))
@@ -124,15 +130,17 @@ namespace CrptoTrade.Trading
             {
                 response.EnsureSuccessStatusCode();
                 var responseData = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-                var traded = responseData.GetValue("filled_size").Value<string>().ToDecimal();
-                return new TradeInfo
-                {
-                    Initial = size,
-                    Remains = size - traded,
-                    TradeSize = traded,
-                    DollarValue = traded * price
-                };
+                traded = responseData.GetValue("filled_size").Value<string>().ToDecimal();
             }
+            sw.Stop();
+            return new TradeInfo
+            {
+                Initial = size,
+                Remains = size - traded,
+                TradeSize = traded,
+                DollarValue = traded * price,
+                TimeInMilliSec = ((int)(sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m
+            };
         }
 
         private static string GetSide(bool buySide)

@@ -22,7 +22,7 @@ namespace CrptoTrade.Trading
             var response = new TradeResponse
             {
                 TradeSummary = new List<string>(),
-                Initial = buy.Current.ToString("N")
+                Initial = $"{buy.Current}"
             };
             var tasks = new List<Task<TradeInfo>>();
             var keepLooping = true;
@@ -46,7 +46,7 @@ namespace CrptoTrade.Trading
                     var info = await finished.ConfigureAwait(false);
                     response.TradeSummary.Add(info.Summary(cnt++));
                     buy.AddValue(info.Remains);
-                    dollarVal += info.DollarValue;
+                    dollarVal += decimal.Round(info.DollarValue, 2);
                     tradeSize += info.TradeSize;
                 }
                 else
@@ -56,9 +56,9 @@ namespace CrptoTrade.Trading
             }
             sw.Stop();
 
-            response.FinalRemains = buy.Current.ToString("N");
+            response.FinalRemains = $"{buy.Current}";
             response.TotalDollarValue = dollarVal.ToString("N");
-            response.TotalTradeSize = tradeSize.ToString("N");
+            response.TotalTradeSize = $"{tradeSize}";
             response.TotalTimeInMiiliSec = ((int) (sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
             return response;
         }
@@ -84,7 +84,7 @@ namespace CrptoTrade.Trading
             var response = new TradeResponse
             {
                 TradeSummary = new List<string>(),
-                Initial = sell.Current.ToString("N")
+                Initial = $"{sell.Current}"
             };
             var tasks = new List<Task<TradeInfo>>();
             var keepLooping = true;
@@ -118,9 +118,9 @@ namespace CrptoTrade.Trading
             }
             sw.Stop();
 
-            response.FinalRemains = sell.Current.ToString("N");
+            response.FinalRemains = $"{sell.Current}";
             response.TotalDollarValue = dollarVal.ToString("N");
-            response.TotalTradeSize = tradeSize.ToString("N");
+            response.TotalTradeSize = $"{tradeSize}";
             response.TotalTimeInMiiliSec = ((int)(sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
             return response;
         }
