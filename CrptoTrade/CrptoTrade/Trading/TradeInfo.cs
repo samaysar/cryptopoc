@@ -13,7 +13,7 @@ namespace CrptoTrade.Trading
         public string Summary(int position)
         {
             return
-                $"Trade-{position} => Initial={Initial},Traded={TradeSize},Remain:{Remains},$={DollarValue},MilliSecTime:{TimeInMilliSec / 1000.0m}";
+                $"Trade-{position} => Initial={Initial},Traded={TradeSize},Remain:{Remains},$={DollarValue},MilliSecTime:{TimeInMilliSec}";
         }
     }
 

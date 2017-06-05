@@ -32,10 +32,12 @@ namespace CrptoTrade.Trading
             var sw = Stopwatch.StartNew();
             while (keepLooping)
             {
+                buy.LastSize = 0;
                 _askHeap.FindSizeAndPrice(buy);
                 while (!buy.LastSize.Equals(0m))
                 {
                     tasks.Add(GetBuyTask(buy));
+                buy.LastSize = 0;
                     _askHeap.FindSizeAndPrice(buy);
                 }
                 if (tasks.Count > 0)
@@ -56,7 +58,7 @@ namespace CrptoTrade.Trading
             }
             sw.Stop();
 
-            response.FinalRemains = $"{buy.Current}";
+            response.FinalRemains = $"{decimal.Round(buy.Current, 8)}";
             response.TotalDollarValue = dollarVal.ToString("N");
             response.TotalTradeSize = $"{tradeSize}";
             response.TotalTimeInMiiliSec = ((int) (sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
@@ -94,10 +96,12 @@ namespace CrptoTrade.Trading
             var sw = Stopwatch.StartNew();
             while (keepLooping)
             {
+                sell.LastSize = 0;
                 _bidHeap.FindPriceAdjustSize(sell);
                 while (!sell.LastSize.Equals(0m))
                 {
                     tasks.Add(GetSellTask(sell));
+                    sell.LastSize = 0;
                     _bidHeap.FindPriceAdjustSize(sell);
                 }
                 if (tasks.Count > 0)
@@ -118,7 +122,7 @@ namespace CrptoTrade.Trading
             }
             sw.Stop();
 
-            response.FinalRemains = $"{sell.Current}";
+            response.FinalRemains = $"{decimal.Round(sell.Current, 8)}";
             response.TotalDollarValue = dollarVal.ToString("N");
             response.TotalTradeSize = $"{tradeSize}";
             response.TotalTimeInMiiliSec = ((int)(sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;

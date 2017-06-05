@@ -52,33 +52,42 @@ namespace CrptoTrade
 
         [HttpGet]
         [Route("fakebuy")]
-        public Task<TradeResponse> FakeBuy([FromUri] int currency, [FromUri] decimal dollarAmount)
+        public async Task<TradeResponse> FakeBuy([FromUri] int currency, [FromUri] decimal dollarAmount)
         {
             if (currency < 0 || currency > 2)
             {
-                return Task.FromResult(new TradeResponse
+                return new TradeResponse
                 {
-                    Error = $"Currency Value invalid, Use 0,1,2"
-                });
+                    Error = "Currency Value invalid, Use 0,1,2"
+                };
             }
             var currencyEnum = (CryptoCurrency) currency;
-            return _factory.GetTrader(currencyEnum).TradeAsync(new BuyPosition(dollarAmount));
+            var result = await _factory.GetTrader(currencyEnum).TradeAsync(new BuyPosition(dollarAmount))
+                .ConfigureAwait(false);
+            result.TotalTradeSize += $" {currencyEnum}";
 
+            return result;
         }
 
         [HttpGet]
         [Route("fakesell")]
-        public Task<TradeResponse> FakeSell([FromUri] int currency, [FromUri] decimal currencyAmount)
+        public async Task<TradeResponse> FakeSell([FromUri] int currency, [FromUri] decimal currencyAmount)
         {
             if (currency < 0 || currency > 2)
             {
-                return Task.FromResult(new TradeResponse
+                return new TradeResponse
                 {
-                    Error = $"Currency Value invalid, Use 0,1,2"
-                });
+                    Error = "Currency Value invalid, Use 0,1,2"
+                };
             }
             var currencyEnum = (CryptoCurrency) currency;
-            return _factory.GetTrader(currencyEnum).TradeAsync(new SellPosition(currencyAmount));
+            var result = await _factory.GetTrader(currencyEnum).TradeAsync(new SellPosition(currencyAmount))
+                .ConfigureAwait(false);
+            result.Initial += $" {currencyEnum}";
+            result.FinalRemains += $" {currencyEnum}";
+            result.TotalTradeSize += $" {currencyEnum}";
+
+            return result;
         }
     }
 }
