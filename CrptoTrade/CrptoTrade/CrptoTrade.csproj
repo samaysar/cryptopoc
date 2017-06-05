@@ -95,6 +95,9 @@
     <Reference Include="WebActivator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivator.1.0.0.0\lib\WebActivator.dll</HintPath>
     </Reference>
+    <Reference Include="WebSocket4Net, Version=0.14.1.0, Culture=neutral, PublicKeyToken=eb4e154b696bf72a, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocket4Net.0.14.1\lib\net45\WebSocket4Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiBootStrap.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Assets\Quote.cs" />
     <Compile Include="Assets\Positions.cs" />
     <Compile Include="TradeController.cs" />
+    <Compile Include="Trading\Exchange.cs" />
     <Compile Include="Trading\ITrader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

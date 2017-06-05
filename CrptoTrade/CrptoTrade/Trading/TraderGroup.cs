@@ -9,7 +9,6 @@ namespace CrptoTrade.Trading
 
         public TraderGroup(CryptoCurrency currency)
         {
-
         }
     }
 }
