@@ -6,13 +6,13 @@ namespace CrptoTrade.Trading
     public interface IBuyer
     {
         //returns unfilled size
-        Task<decimal> BuyAsync(decimal size, decimal price);
+        Task<TradeInfo> BuyAsync(decimal size, decimal price);
     }
 
     public interface ISeller
     {
         //returns unfilled size
-        Task<decimal> SellAsync(decimal size, decimal price);
+        Task<TradeInfo> SellAsync(decimal size, decimal price);
     }
 
     public interface ITrader : IBuyer, ISeller
@@ -32,7 +32,7 @@ namespace CrptoTrade.Trading
         }
 
         public abstract void HandleQuote(string quoteMessage);
-        public abstract Task<decimal> BuyAsync(decimal size, decimal price);
-        public abstract Task<decimal> SellAsync(decimal size, decimal price);
+        public abstract Task<TradeInfo> BuyAsync(decimal size, decimal price);
+        public abstract Task<TradeInfo> SellAsync(decimal size, decimal price);
     }
 }

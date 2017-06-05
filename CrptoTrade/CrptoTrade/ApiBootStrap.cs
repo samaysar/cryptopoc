@@ -5,6 +5,7 @@ using System.Web.Http;
 using System.Web.Http.Dependencies;
 using CrptoTrade.Trading;
 using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
 using Owin;
 
 namespace CrptoTrade
@@ -19,8 +20,8 @@ namespace CrptoTrade
             var di = new UnityContainer();
             var xchgs = new IExchange[]
             {
-                //Pass it audthenticated client
-                new GdaxExchange(new HttpClient(), 0)
+                //Pass it audthenticated client, if Using GDax
+                new FakeExchange(new HttpClient(), 0)
                 //Add new exchanges
             };
 
@@ -29,8 +30,49 @@ namespace CrptoTrade
             config.DependencyResolver = new UnityResolver(di);
             
             //other config related stuff... like cors, messageHandler, formatters etc
-
             app.UseWebApi(config);
+        }
+    }
+
+    public class DecimalJsonConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return (objectType == typeof(decimal));
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType,
+                                        object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.String)
+            {
+                if ((string)reader.Value == string.Empty)
+                {
+                    return decimal.MinValue;
+                }
+            }
+            else if (reader.TokenType == JsonToken.Float ||
+                     reader.TokenType == JsonToken.Integer)
+            {
+                return Convert.ToDecimal(reader.Value);
+            }
+
+            throw new JsonSerializationException("Unexpected token type: " +
+                                                 reader.TokenType.ToString());
+        }
+
+        public override void WriteJson(JsonWriter writer, object value,
+                                       JsonSerializer serializer)
+        {
+            decimal dec = (decimal)value;
+            if (dec == decimal.MinValue)
+            {
+                writer.WriteValue(string.Empty);
+            }
+            else
+            {
+                writer.WriteValue(dec);
+            }
         }
     }
 

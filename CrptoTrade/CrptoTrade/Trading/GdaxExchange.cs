@@ -14,6 +14,28 @@ namespace CrptoTrade.Trading
         MaxHeap<Quote> BidHeap(CryptoCurrency currency);
     }
 
+    public class FakeExchange : GdaxExchange
+    {
+        private readonly Random _delay = new Random();
+        public FakeExchange(HttpClient authClient, int id, int initialCapex = 16384)
+            : base(authClient, id, initialCapex)
+        {
+        }
+
+        protected override async Task<TradeInfo> TradeAsync(decimal size, decimal price, string ticker, bool buySide)
+        {
+            //we sleep for a while to simulate
+            await Task.Delay(_delay.Next(1, 10)).ConfigureAwait(false);
+            return new TradeInfo
+            {
+                Initial = size,
+                Remains = 0,
+                TradeSize = size,
+                DollarValue = size * price
+            };
+        }
+    }
+
     public class GdaxExchange : IExchange
     {
         private const decimal MinSize = 0.01m;
@@ -65,7 +87,8 @@ namespace CrptoTrade.Trading
                 : new MaxHeap<Quote>(_id, Quote.Equality, 0);
         }
 
-        private async Task<decimal> TradeAsync(decimal size, decimal price, string ticker, bool buySide)
+        //need to make it protected virtual to have easy FAKE xchg
+        protected virtual async Task<TradeInfo> TradeAsync(decimal size, decimal price, string ticker, bool buySide)
         {
             //{
             //    "id": "68e6a28f-ae28-4788-8d4f-5ab4e5e5ae08",
@@ -97,11 +120,18 @@ namespace CrptoTrade.Trading
                 var responseData = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                 id = responseData.GetValue("id").Value<string>();
             }
-            using (var response = await _authClient.GetAsync("/orders/"+id).ConfigureAwait(false))
+            using (var response = await _authClient.GetAsync("/orders/" + id).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var responseData = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-                return size - responseData.GetValue("filled_size").Value<string>().ToDecimal();
+                var traded = responseData.GetValue("filled_size").Value<string>().ToDecimal();
+                return new TradeInfo
+                {
+                    Initial = size,
+                    Remains = size - traded,
+                    TradeSize = traded,
+                    DollarValue = traded * price
+                };
             }
         }
 
@@ -172,12 +202,12 @@ namespace CrptoTrade.Trading
             public MinHeap<Quote> AskHeap => _askHeap;
             public MaxHeap<Quote> BidHeap => _bidHeap;
 
-            public override Task<decimal> BuyAsync(decimal size, decimal price)
+            public override Task<TradeInfo> BuyAsync(decimal size, decimal price)
             {
                 return _xchg.TradeAsync(size, price, _ticker, true);
             }
 
-            public override Task<decimal> SellAsync(decimal size, decimal price)
+            public override Task<TradeInfo> SellAsync(decimal size, decimal price)
             {
                 return _xchg.TradeAsync(size, price, _ticker, false);
             }

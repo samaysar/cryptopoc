@@ -11,8 +11,8 @@ namespace CrptoTrade.Trading
             _lookup = new Dictionary<CryptoCurrency, TraderGroup>
             {
                 [CryptoCurrency.Btc] = new TraderGroup(CryptoCurrency.Btc, xchgs),
-                //[CryptoCurrency.Eth] = new TraderGroup(CryptoCurrency.Eth, xchgs),
-                //[CryptoCurrency.Ltc] = new TraderGroup(CryptoCurrency.Ltc, xchgs)
+                [CryptoCurrency.Eth] = new TraderGroup(CryptoCurrency.Eth, xchgs),
+                [CryptoCurrency.Ltc] = new TraderGroup(CryptoCurrency.Ltc, xchgs)
             };
         }
 
