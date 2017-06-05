@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
 using CrptoTrade.Trading;
@@ -16,7 +17,14 @@ namespace CrptoTrade
             config.MapHttpAttributeRoutes();
 
             var di = new UnityContainer();
-            di.RegisterInstance(new TradingFactory());
+            var xchgs = new IExchange[]
+            {
+                //Pass it audthenticated client
+                new GdaxExchange(new HttpClient(), 0)
+                //Add new exchanges
+            };
+
+            di.RegisterInstance(new TradingFactory(xchgs));
             //.. more DI
             config.DependencyResolver = new UnityResolver(di);
             

@@ -1,0 +1,2501 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dot.Net.DevFast</name>
+    </assembly>
+    <members>
+        <member name="T:Dot.Net.DevFast.Etc.DdnDfErrorCode">
+            <summary>
+            Enum Error codes associated with <seealso cref="T:Dot.Net.DevFast.Etc.DdnDfException"/>
+            for DevFast project.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.Unspecified">
+            <summary>
+            Unspecified code, when the exception is created by using 
+            its default Ctor.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullString">
+            <summary>
+            String instance is null
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullOrEmptyCollection">
+            <summary>
+            When the supplied collection is null or empty.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.KeyNotFound">
+            <summary>
+            When supplied array is a null instance.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotInCollection">
+            <summary>
+            When supplied array is has no element.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullObject">
+            <summary>
+            When supplied object instance is null.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold">
+            <summary>
+            When given comparable value is less than threshold.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold">
+            <summary>
+            When given comparable value is greater than threshold.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueOutOfBound">
+            <summary>
+            When given comparable value is out of lower and upper bound.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueInBound">
+            <summary>
+            When given comparable value is within lower and upper bound.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual">
+            <summary>
+            When given comparable value is equal to comperand.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual">
+            <summary>
+            When given comparable value is NOT equal to comperand.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed">
+            <summary>
+            When string parsing to a given type fails.
+            </summary>
+        </member>
+        <member name="T:Dot.Net.DevFast.Etc.DdnDfException">
+            <summary>
+            Exceptions used inside DevFast library.
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnDfException.#ctor(Dot.Net.DevFast.Etc.DdnDfErrorCode)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="errorCode">Associated Error code</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnDfException.#ctor(Dot.Net.DevFast.Etc.DdnDfErrorCode,System.String)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="errorCode">Associated Error code</param>
+            <param name="message">message text</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnDfException.#ctor(Dot.Net.DevFast.Etc.DdnDfErrorCode,System.String,System.Exception)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="errorCode">Associated Error code</param>
+            <param name="message">message text</param>
+            <param name="inner">Inner exception</param>
+        </member>
+        <member name="T:Dot.Net.DevFast.Etc.DdnException`1">
+            <summary>
+            Generic Exception class for Dot.Net libraries.
+            <para>All libraries must throw this exception for known error cases.</para>
+            <typeparam name="T">Normally should be ENUM type explaining the cause behind the exception</typeparam>
+            </summary>
+        </member>
+        <member name="P:Dot.Net.DevFast.Etc.DdnException`1.ErrorCode">
+            <summary>
+            Gets the error code associated.
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnException`1.#ctor(`0)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="errorCode">Associated Error code</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnException`1.#ctor(`0,System.String)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="errorCode">Associated Error code</param>
+            <param name="message">message text</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnException`1.#ctor(`0,System.String,System.Exception)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="errorCode">Associated Error code</param>
+            <param name="message">message text</param>
+            <param name="inner">Inner exception</param>
+        </member>
+        <member name="T:Dot.Net.DevFast.Etc.DdnException">
+            <summary>
+            Non generic base exception class for Dot.Net libraries.
+            </summary>
+        </member>
+        <member name="P:Dot.Net.DevFast.Etc.DdnException.Reason">
+            <summary>
+            Gets the error reason string.
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnException.#ctor(System.String)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="reason">Associated Error reason</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnException.#ctor(System.String,System.String)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="reason">Associated Error code</param>
+            <param name="message">message text</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Etc.DdnException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="reason">Associated Error code</param>
+            <param name="message">message text</param>
+            <param name="inner">Inner exception</param>
+        </member>
+        <member name="T:Dot.Net.DevFast.Etc.StdLookUps">
+            <summary>
+            Provides fixed values.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.StdLookUps.ExtSeparator">
+            <summary>
+            Character used to join fileName and extension.
+            </summary>
+        </member>
+        <member name="F:Dot.Net.DevFast.Etc.StdLookUps.DefaultBufferSize">
+            <summary>
+            Default Buffer size for stream related operations.
+            </summary>
+        </member>
+        <member name="T:Dot.Net.DevFast.Extensions.CreateExts">
+            <summary>
+            Extensions related to creation of one type of objects to another type.
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.CreateExts.CreateFileInfo(System.IO.DirectoryInfo,System.String,System.String)">
+            <summary>
+            Returns a new <seealso cref="T:System.IO.FileInfo"/> instance (file is physically NOT created)
+            after combining <paramref name="filename"/>.<paramref name="extension"/>
+            to <seealso cref="P:System.IO.FileSystemInfo.FullName"/> of the <paramref name="folderInfo"/>.
+            <para>Expect all <seealso cref="T:System.IO.FileInfo"/> related errors.</para>
+            </summary>
+            <param name="folderInfo">FolderInfo to which fileInfo is associated</param>
+            <param name="filename">filename without extension</param>
+            <param name="extension">extension without period, e.g., "txt", "json" etc</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.CreateExts.CreateFileInfo(System.IO.DirectoryInfo,System.String)">
+            <summary>
+            Returns a new <seealso cref="T:System.IO.FileInfo"/> instance (file is physically NOT created)
+            after combining <paramref name="filenameWithExt"/>
+            to <seealso cref="P:System.IO.FileSystemInfo.FullName"/> of the <paramref name="folderInfo"/>.
+            <para>Expect all <seealso cref="T:System.IO.FileInfo"/> related errors.</para>
+            </summary>
+            <param name="folderInfo">FolderInfo to which fileInfo is associated</param>
+            <param name="filenameWithExt">file name with extensions, e.g., "abc.txt", "mydata.json" etc</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.CreateExts.CreateBytes(System.ArraySegment{System.Byte})">
+            <summary>
+            Creates the byte array of the segment.
+            </summary>
+            <param name="input">Input segment</param>
+        </member>
+        <member name="T:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext">
+            <summary>
+            Class that provides extensions to perform Base64 string operations
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64(System.String,System.Base64FormattingOptions,System.Text.Encoding)">
+            <summary>
+            Converts the input string to Base64 string.
+            </summary>
+            <param name="input">UTF8 string</param>
+            <param name="options">Options to use for the transformation</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64(System.Byte[],System.Base64FormattingOptions)">
+            <summary>
+            Converts the whole <paramref name="input"/> array to Base64 string.
+            <para>Refer to <see cref="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64(System.ArraySegment{System.Byte},System.Base64FormattingOptions)"/> to perform
+            conversion on a segment of the array</para>
+            </summary>
+            <param name="input">Input byte array</param>
+            <param name="options">Options to use for the transformation</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64(System.ArraySegment{System.Byte},System.Base64FormattingOptions)">
+            <summary>
+            Converts the segment of the <paramref name="input"/> to Base64 string.
+            <para>Refer to <see cref="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64(System.Byte[],System.Base64FormattingOptions)"/> to perform
+            conversion on full array</para>
+            </summary>
+            <param name="input">Input byte array</param>
+            <param name="options">Options to use for the transformation</param>
+            <exception cref="T:System.NullReferenceException">if <paramref name="input"/> is null</exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64(System.String,System.Text.Encoding)">
+            <summary>
+            Converts the <paramref name="base64"/> to unencoded byte array.
+            </summary>
+            <param name="base64">Base64 string</param>
+            <param name="encoding">Encoding to use during byte to string transformations.
+            <para>If null is supplied then encoding is detected from byte order mark.</para></param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64(System.String)">
+            <summary>
+            Converts the <paramref name="base64"/> to unencoded byte array.
+            <para>Expect all base64 transformation related exceptions</para>
+            </summary>
+            <param name="base64">Base64 string</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.Byte[],System.IO.Stream,System.Boolean)">
+            <summary>
+            Reads <paramref name="input"/> bytes and writes Base64 data on <paramref name="base64Stream"/>.
+            <para>NOTE: <paramref name="base64Stream"/> is NEITHER closed NOR disposed inside this operation.
+            Only Flush is performed.</para>
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.Byte[],System.IO.Stream,System.Threading.CancellationToken,System.Boolean)">
+            <summary>
+            Reads <paramref name="input"/> bytes and writes Base64 data on <paramref name="base64Stream"/>
+            while observing <paramref name="token"/> for cancellation.
+            <para>NOTE: <paramref name="base64Stream"/> is NEITHER closed NOR disposed inside this operation.
+            Only Flush is performed.</para>
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.ArraySegment{System.Byte},System.IO.Stream,System.Boolean)">
+            <summary>
+            Reads <paramref name="input"/> byte segment and writes Base64 data on <paramref name="base64Stream"/>.
+            <para>NOTE: <paramref name="base64Stream"/> is NEITHER closed NOR disposed inside this operation.
+            Only Flush is performed.</para>
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.ArraySegment{System.Byte},System.IO.Stream,System.Threading.CancellationToken,System.Boolean)">
+            <summary>
+            Reads <paramref name="input"/> byte segment and writes Base64 data on <paramref name="base64Stream"/>
+            while observing <paramref name="token"/> for cancellation.
+            <para>NOTE: <paramref name="base64Stream"/> is NEITHER closed NOR disposed inside this operation.
+            Only Flush is performed.</para>
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.String,System.IO.Stream,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads characters from <paramref name="input"/> and writes Base64 data on <paramref name="base64Stream"/>, 
+            using <paramref name="encoding"/>.
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.String,System.IO.Stream,System.Threading.CancellationToken,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads characters from <paramref name="input"/> and writes Base64 data on <paramref name="base64Stream"/>, 
+            using <paramref name="encoding"/>, while observing <paramref name="token"/> for cancellation.
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.Text.StringBuilder,System.IO.Stream,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads characters from <paramref name="input"/> and writes Base64 data on <paramref name="base64Stream"/>, 
+            using <paramref name="encoding"/>.
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.Text.StringBuilder,System.IO.Stream,System.Threading.CancellationToken,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads characters from <paramref name="input"/> and writes Base64 data on <paramref name="base64Stream"/>, 
+            using <paramref name="encoding"/>, while observing <paramref name="token"/> for cancellation.
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.IO.Stream,System.IO.Stream,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Reads from <paramref name="inputStream"/> and writes Base64 data on <paramref name="base64Stream"/>.
+            </summary>
+            <param name="inputStream">Stream to read from</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="disposeInput">If true, disposes <paramref name="inputStream"/> upon operation completion, else leaves it open</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.ToBase64Async(System.IO.Stream,System.IO.Stream,System.Threading.CancellationToken,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Reads from <paramref name="inputStream"/> and writes Base64 data on <paramref name="base64Stream"/>,
+            while observing <paramref name="token"/>.
+            </summary>
+            <param name="inputStream">Stream to read from</param>
+            <param name="base64Stream">Stream to write base64 data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeInput">If true, disposes <paramref name="inputStream"/> upon operation completion, else leaves it open</param>
+            <param name="disposeOutput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64Async(System.IO.Stream,System.IO.Stream,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and writes decoded data on <paramref name="decodedStream"/>,
+            with <paramref name="bufferSize"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="decodedStream">Stream to write decoded data to</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="disposeOutput">If true, disposes <paramref name="decodedStream"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64Async(System.IO.Stream,System.IO.Stream,System.Threading.CancellationToken,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and writes unencoded data on <paramref name="decodedStream"/>,
+            with <paramref name="bufferSize"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="decodedStream">Stream to write unencoded data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="disposeOutput">If true, disposes <paramref name="decodedStream"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64Async(System.IO.Stream,System.Text.StringBuilder,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and appends decoded string to <paramref name="appendTo"/>,
+            with <paramref name="bufferSize"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="appendTo">Stream to write decoded data to</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64Async(System.IO.Stream,System.Text.StringBuilder,System.Threading.CancellationToken,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and appends decoded string to <paramref name="appendTo"/>,
+            with <paramref name="bufferSize"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="appendTo">Stream to write decoded data to</param>
+            <param name="token">Cancellation token</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64Async(System.IO.Stream,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and prepares decoded string (return value),
+            with <paramref name="bufferSize"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64Async(System.IO.Stream,System.Threading.CancellationToken,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and prepares decoded string (return value),
+            with <paramref name="bufferSize"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="token">Cancellation token</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64Async(System.IO.Stream,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and prepares decoded byte array (return value),
+            with <paramref name="bufferSize"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64Async(System.IO.Stream,System.Threading.CancellationToken,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and prepares decoded byte array (return value),
+            with <paramref name="bufferSize"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="token">Cancellation token</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64AsSegmentAsync(System.IO.Stream,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and prepares decoded byte array, (return as segment, 
+            idea is to save on array copy to remain low on latency n memory as perhaps segment can serve the purpose),
+            with <paramref name="bufferSize"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.Base64Ext.FromBase64AsSegmentAsync(System.IO.Stream,System.Threading.CancellationToken,System.Security.Cryptography.FromBase64TransformMode,System.Boolean,System.Int32)">
+            <summary>
+            Reads Base64 data from <paramref name="base64Stream"/> and prepares decoded byte array, (return as segment, 
+            idea is to save on array copy to remain low on latency n memory as perhaps segment can serve the purpose),
+            with <paramref name="bufferSize"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="base64Stream">Stream to read Base64 data from</param>
+            <param name="token">Cancellation token</param>
+            <param name="mode">transformation mode to use</param>
+            <param name="disposeInput">If true, disposes <paramref name="base64Stream"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="T:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt">
+            <summary>
+            Extensions on Cypto stream for data transformation.
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsync(System.ArraySegment{System.Byte},System.Security.Cryptography.ICryptoTransform,System.IO.Stream,System.Threading.CancellationToken,System.Boolean)">
+            <summary>
+            Reads byte segment from <paramref name="input"/> and writes transformed data on <paramref name="streamToWrite"/>,
+            using <paramref name="transform"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="input">Bytes to transform</param>
+            <param name="transform">transform to use</param>
+            <param name="streamToWrite">Stream to write transformed data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeOutput">If true, disposes <paramref name="streamToWrite"/> upon operation completion, else leaves it open</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsync(System.Byte[],System.Security.Cryptography.ICryptoTransform,System.IO.Stream,System.Threading.CancellationToken,System.Boolean)">
+            <summary>
+            Reads full <paramref name="input"/> array and writes transformed data on <paramref name="streamToWrite"/>,
+            using <paramref name="transform"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="input">Bytes to transform</param>
+            <param name="transform">transform to use</param>
+            <param name="streamToWrite">Stream to write transformed data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeOutput">If true, disposes <paramref name="streamToWrite"/> upon operation completion, else leaves it open</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsync(System.IO.Stream,System.Security.Cryptography.ICryptoTransform,System.IO.Stream,System.Threading.CancellationToken,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Reads from <paramref name="streamToRead"/> and writes transformed data on <paramref name="streamToWrite"/>,
+            using <paramref name="transform"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="streamToRead">Stream to read from</param>
+            <param name="transform">transform to use</param>
+            <param name="streamToWrite">Stream to write transformed data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeInput">If true, disposes <paramref name="streamToRead"/> upon operation completion, else leaves it open</param>
+            <param name="disposeOutput">If true, disposes <paramref name="streamToWrite"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsync(System.IO.Stream,System.Security.Cryptography.ICryptoTransform,System.Threading.CancellationToken,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads from <paramref name="streamToRead"/> and prepares transformed string (return value),
+            using <paramref name="transform"/> and <paramref name="encoding"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="streamToRead">Stream to read from</param>
+            <param name="transform">transform to use</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeInput">If true, disposes <paramref name="streamToRead"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to compose string characters, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsync(System.IO.Stream,System.Security.Cryptography.ICryptoTransform,System.Threading.CancellationToken,System.Boolean,System.Int32)">
+            <summary>
+            Reads from <paramref name="streamToRead"/> and prepares decoded byte array (return value),
+            using <paramref name="transform"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="streamToRead">Stream to read from</param>
+            <param name="transform">transform to use</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeInput">If true, disposes <paramref name="streamToRead"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsSegmentAsync(System.IO.Stream,System.Security.Cryptography.ICryptoTransform,System.Threading.CancellationToken,System.Boolean,System.Int32)">
+            <summary>
+            Reads from <paramref name="streamToRead"/> and prepares decoded byte array, (return as segment, 
+            idea is to save on array copy to remain low on latency n memory as perhaps segment can serve the purpose),
+            using <paramref name="transform"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="streamToRead">Stream to read from</param>
+            <param name="transform">transform to use</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeInput">If true, disposes <paramref name="streamToRead"/> upon operation completion, else leaves it open</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsync(System.IO.Stream,System.Security.Cryptography.ICryptoTransform,System.Text.StringBuilder,System.Threading.CancellationToken,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads from <paramref name="streamToRead"/> and appends transformed string to <paramref name="appendTo"/>,
+            using <paramref name="transform"/> and <paramref name="encoding"/>, while observing <paramref name="token"/>.
+            </summary>
+            <param name="streamToRead">Stream to read from</param>
+            <param name="transform">transform to use</param>
+            <param name="appendTo">StringBuilder to write transformed data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeInput">If true, disposes <paramref name="streamToRead"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to compose string characters, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsync(System.Text.StringBuilder,System.Security.Cryptography.ICryptoTransform,System.IO.Stream,System.Threading.CancellationToken,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads characters from <paramref name="input"/> and writes transformed data on <paramref name="streamToWrite"/>,
+            using <paramref name="transform"/> and <paramref name="encoding"/> while observing 
+            <paramref name="token"/> for cancellation.
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="transform">transform to use</param>
+            <param name="streamToWrite">Stream to write transformed data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeOutput">If true, disposes <paramref name="streamToWrite"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StreamExt.CryptoStreamExt.TransformAsync(System.String,System.Security.Cryptography.ICryptoTransform,System.IO.Stream,System.Threading.CancellationToken,System.Boolean,System.Text.Encoding,System.Int32)">
+            <summary>
+            Reads characters from <paramref name="input"/> and writes transformed data on <paramref name="streamToWrite"/>, 
+            using <paramref name="transform"/> and <paramref name="encoding"/> while observing <paramref name="token"/> for cancellation.
+            </summary>
+            <param name="input">String to convert</param>
+            <param name="transform">transform to use</param>
+            <param name="streamToWrite">Stream to write transformed data to.</param>
+            <param name="token">Cancellation token</param>
+            <param name="disposeOutput">If true, disposes <paramref name="streamToWrite"/> upon operation completion, else leaves it open</param>
+            <param name="encoding">Encoding to use to get string bytes, if not supplied UTF8 is used</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="T:Dot.Net.DevFast.Extensions.StringExt.StringSafe">
+            <summary>
+            Extension method on Safe (non-error throwing, except GIGO) string operations
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrEmpty(System.String,System.Char[])">
+            <summary>
+            If value is null <seealso cref="F:System.String.Empty"/> is returned else trimmed string.
+            <para>Also check <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.TrimUnsafe(System.String,System.Char[])"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrNull(System.String,System.Char[])"/> and <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrDefault(System.String,System.String,System.Char[])"/></para>
+            </summary>
+            <param name="input">Value to trim safe</param>
+            <param name="trimChars">optional. when not given any char set,
+            whitespaces will be removed</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrNull(System.String,System.Char[])">
+            <summary>
+            If value is null, null is returned else trimmed string.
+            <para>Also check <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.TrimUnsafe(System.String,System.Char[])"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrEmpty(System.String,System.Char[])"/> and <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrDefault(System.String,System.String,System.Char[])"/></para>
+            </summary>
+            <param name="input">Value to trim safe</param>
+            <param name="trimChars">optional. when not given any char set,
+            whitespaces will be removed</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrDefault(System.String,System.String,System.Char[])">
+            <summary>
+            If value is null <paramref name="defaultValue"/> is returned else trimmed string.
+            <para>Also check <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.TrimUnsafe(System.String,System.Char[])"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrEmpty(System.String,System.Char[])"/> and <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrNull(System.String,System.Char[])"/></para>
+            </summary>
+            <param name="input">Value to trim safe</param>
+            <param name="defaultValue">default value to return when input is null.</param>
+            <param name="trimChars">optional. when not given any char set,
+            whitespaces will be removed</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumOrDefault``1(System.String,``0,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Enum"/> value along with
+            <seealso cref="M:System.Enum.IsDefined(System.Type,System.Object)"/> check. Useful when it is not certain whether the parsed value 
+            will result in existing define enum value (example when parsing integers back to enum coming from outside).
+            If parsing is successful then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            <para>Also check <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,``0@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,System.Nullable{``0}@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,``0@,System.Boolean)"/> and
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,System.Nullable{``0}@,System.Boolean)"/> methods</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="ignoreCase">true to ignore case, else false to consider string casing</param>
+            <typeparam name="T">Enum type</typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumUncheckedOrDefault``1(System.String,``0,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Enum"/> value (NOTE: <seealso cref="M:System.Enum.IsDefined(System.Type,System.Object)"/> check
+            is NOT performed). Useful when it is known for sure that the parsed value is among existing value..
+            If parsing is successful then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            <para>Also check <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,``0@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,System.Nullable{``0}@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,``0@,System.Boolean)"/> and
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,System.Nullable{``0}@,System.Boolean)"/> methods</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="ignoreCase">true to ignore case, else false to consider string casing</param>
+            <typeparam name="T">Enum type</typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Boolean"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.Int32,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int32"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.Int64,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int64"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.Byte,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Byte"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.SByte,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.SByte"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.Int16,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int16"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.UInt16,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt16"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.UInt32,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt32"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.UInt64,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt64"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.Single,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Single"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.Double,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Double"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.Decimal,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Decimal"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.DateTime,System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value using exact parsing.
+            If parsing is successful then returns the parsed value else returns the 
+            <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="format">date format string</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.DateTime,System.String[],System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value using exact parsing
+            based on given set of formats. If parsing is successful then returns the parsed value 
+            else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="formats">date format strings</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToOrDefault(System.String,System.DateTime,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value. If parsing is successful
+            then returns the parsed value else returns the <paramref name="defaultVal"/>.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="defaultVal">Default value to return when parsing fails</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="T:Dot.Net.DevFast.Extensions.StringExt.StringTryTo">
+            <summary>
+            Extension methods to parse string to different structs.
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Boolean@)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Boolean"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Type@,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Type"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="ignoreCase">true to ignore string casing else false to consider casing</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Int32@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int32"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Int64@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int64"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Byte@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Byte"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.SByte@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.SByte"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Int16@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int16"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.UInt16@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt16"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.UInt32@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt32"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.UInt64@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt64"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Single@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Single"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Double@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Double"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Decimal@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Decimal"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.DateTime@,System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value using exact parsing.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="format">date format string</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.DateTime@,System.String[],System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value using exact parsing
+            based on given set of formats.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="formats">date format strings</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.DateTime@,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,``0@,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Enum"/> value.
+            <para>Does not validate the existence of parsed value. Could be useful when
+            it is known for sure that the parsed value is among existing value.</para>
+            <para>Also check <see cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,``0@,System.Boolean)"/>
+            and <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumOrDefault``1(System.String,``0,System.Boolean)"/> and 
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumUncheckedOrDefault``1(System.String,``0,System.Boolean)"/> methods</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="ignoreCase">true to ignore case, else false to consider string casing</param>
+            <returns>True if parsing is successful else false</returns>
+            <typeparam name="T">Enum type</typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,``0@,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Enum"/> value.
+            <para>If parsing is successful then calls <seealso cref="M:System.Enum.IsDefined(System.Type,System.Object)"/>. Useful when
+            it is not certain whether the parsed value will result in existing define enum value.
+            (example when parsing integers back to enum coming from outside)</para>
+            <para>Also check <see cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,``0@,System.Boolean)"/>
+            and <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumOrDefault``1(System.String,``0,System.Boolean)"/> and 
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumUncheckedOrDefault``1(System.String,``0,System.Boolean)"/> methods</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="ignoreCase">true to ignore case, else false to consider string casing</param>
+            <returns>True if parsing is successful else false</returns>
+            <typeparam name="T">Enum type</typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.Boolean}@)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Boolean"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.Boolean"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.Boolean"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.Int32}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int32"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.Int32"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.Int32"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.Int64}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int64"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.Int64"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.Int64"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.Byte}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Byte"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.Byte"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.Byte"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.SByte}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.SByte"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.SByte"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.SByte"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.Int16}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int16"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.Int16"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.Int16"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.UInt16}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt16"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.UInt16"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.UInt16"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.UInt32}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt32"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.UInt32"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.UInt32"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.UInt64}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt64"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.UInt64"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.UInt64"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.Single}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Single"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.Single"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.Single"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.Double}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Double"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.Double"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.Double"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.Decimal}@,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Decimal"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.Decimal"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.Decimal"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.DateTime}@,System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/>? value using exact parsing.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.DateTime"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.DateTime"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="format">date format string</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.DateTime}@,System.String[],System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/>? value using exact parsing
+            based on given set of formats.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.DateTime"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.DateTime"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="formats">date format strings</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryTo(System.String,System.Nullable{System.DateTime}@,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/>? value.
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <seealso cref="T:System.DateTime"/> with
+            <paramref name="value"/> as the parsed outcome.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <seealso cref="T:System.DateTime"/>
+            with <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,System.Nullable{``0}@,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Enum"/> value.
+            <para>Does not validate the existence of parsed value. Could be useful when
+            it is known for sure that the parsed value is among existing value.</para>
+            <para>Also check <see cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,System.Nullable{``0}@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumOrDefault``1(System.String,``0,System.Boolean)"/> and 
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumUncheckedOrDefault``1(System.String,``0,System.Boolean)"/> methods</para>
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <typeparamref name="T"/> with
+            <paramref name="value"/> as the parsed outcome without checking whether it is defined or not.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <typeparamref name="T"/>
+            and <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="ignoreCase">true to ignore case, else false to consider string casing</param>
+            <returns>True if parsing is successful else false</returns>
+            <typeparam name="T">Enum type</typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,System.Nullable{``0}@,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Enum"/> value.
+            <para>If parsing is successful then calls <seealso cref="M:System.Enum.IsDefined(System.Type,System.Object)"/>. Useful when
+            it is not certain whether the parsed value will result in existing define enum value.
+            (example when parsing integers back to enum coming from outside)</para>
+            <para>Also check <see cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,System.Nullable{``0}@,System.Boolean)"/>
+            and <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumOrDefault``1(System.String,``0,System.Boolean)"/> and 
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.ToEnumUncheckedOrDefault``1(System.String,``0,System.Boolean)"/> methods</para>
+            <para>Returns true when:
+            <list type="bullet">
+            <item><description><paramref name="input"/> is <seealso cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+            and out <paramref name="value"/> as null.</description></item>
+            <item><description><paramref name="input"/> is parsable to <typeparamref name="T"/> with
+            <paramref name="value"/> as the parsed outcome among defined values.</description></item>
+            </list></para>
+            <para>Returns false when <paramref name="input"/> is NOT parsable to <typeparamref name="T"/>
+            or the value does not exits among defined value, in this case <paramref name="value"/> as null.</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="value">parsed value</param>
+            <param name="ignoreCase">true to ignore case, else false to consider string casing</param>
+            <returns>True if parsing is successful else false</returns>
+            <typeparam name="T">Enum type</typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe">
+            <summary>
+            Extension method on UnSafe (possible exception or invalid results) string operations
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.TrimUnsafe(System.String,System.Char[])">
+            <summary>
+            Trims string when not null else throws error (another way to avoid <seealso cref="T:System.NullReferenceException"/>)
+            <para>Also check <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrEmpty(System.String,System.Char[])"/>, 
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrNull(System.String,System.Char[])"/> and 
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringSafe.TrimSafeOrDefault(System.String,System.String,System.Char[])"/></para>
+            </summary>
+            <param name="input">Value to trim safe</param>
+            <param name="trimChars">optional. when not given any char set,
+            whitespaces will be removed</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">When null string is passed as input
+            (refer <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullString"/>)</exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToFileInfo(System.String,System.String,System.String)">
+            <summary>
+            Returns a new <seealso cref="T:System.IO.FileInfo"/> instance after joining filename with extension
+            to the <paramref name="folderPath"/>.
+            <para>Expect all <seealso cref="T:System.IO.FileInfo"/> related errors.</para>
+            </summary>
+            <param name="folderPath">Folder path to the file</param>
+            <param name="filename">filename without extension</param>
+            <param name="extension">extension without period, e.g., "txt", "json" etc</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToFileInfo(System.String,System.String)">
+            <summary>
+            Returns a new <seealso cref="T:System.IO.FileInfo"/> instance after joining <paramref name="filenameWithExt"/>
+            to the <paramref name="folderPath"/>.
+            <para>Expect all <seealso cref="T:System.IO.FileInfo"/> related errors.</para>
+            </summary>
+            <param name="folderPath">Folder path to the file</param>
+            <param name="filenameWithExt">file name with extensions, e.g., "abc.txt", "mydata.json" etc</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToFileInfo(System.String)">
+            <summary>
+            Returns a new <seealso cref="T:System.IO.FileInfo"/> instance from given <paramref name="fullFilePath"/>.
+            <para>Expect all <seealso cref="T:System.IO.FileInfo"/> related errors.</para>
+            </summary>
+            <param name="fullFilePath">Complete path of the file</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToDirectoryInfo(System.String,System.String[],System.Boolean)">
+            <summary>
+            Returns a new <seealso cref="T:System.IO.DirectoryInfo"/> instance from combined path using
+            <paramref name="basePath"/> and <paramref name="subPaths"/>.
+            <para>Expect all <seealso cref="T:System.IO.DirectoryInfo"/> related errors.</para>
+            </summary>
+            <param name="basePath">base path</param>
+            <param name="subPaths">individual path components</param>
+            <param name="create">if true <seealso cref="M:System.IO.Directory.CreateDirectory(System.String)"/> will be called</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">When null array is passed as input
+            (refer  <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullOrEmptyCollection"/>)</exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToDirectoryInfo(System.String,System.Boolean)">
+            <summary>
+            Returns a new <seealso cref="T:System.IO.DirectoryInfo"/> instance from given <paramref name="fullPath"/>.
+            <para>Expect all <seealso cref="T:System.IO.DirectoryInfo"/> related errors.</para>
+            </summary>
+            <param name="fullPath">Full path to the directory</param>
+            <param name="create">if true <seealso cref="M:System.IO.Directory.CreateDirectory(System.String)"/> will be called</param>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToEnum``1(System.String,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Enum"/> value along with
+            <seealso cref="M:System.Enum.IsDefined(System.Type,System.Object)"/> check. Useful when it is not certain whether the parsed value 
+            will result in existing define enum value (example when parsing integers back to enum coming from outside).
+            If parsing is successful then returns the parsed value else throws an exception.
+            <para>Also check <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,``0@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,System.Nullable{``0}@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,``0@,System.Boolean)"/> and
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,System.Nullable{``0}@,System.Boolean)"/> methods</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="ignoreCase">true to ignore case, else false to consider string casing</param>
+            <typeparam name="T">Enum type</typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToEnumUnchecked``1(System.String,System.Boolean)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Enum"/> value (NOTE: <seealso cref="M:System.Enum.IsDefined(System.Type,System.Object)"/> check
+            is NOT performed). Useful when it is known for sure that the parsed value is among existing value..
+            If parsing is successful then returns the parsed value else throws an exception.
+            <para>Also check <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,``0@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnumUnchecked``1(System.String,System.Nullable{``0}@,System.Boolean)"/>,
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,``0@,System.Boolean)"/> and
+            <seealso cref="M:Dot.Net.DevFast.Extensions.StringExt.StringTryTo.TryToEnum``1(System.String,System.Nullable{``0}@,System.Boolean)"/> methods</para>
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="ignoreCase">true to ignore case, else false to consider string casing</param>
+            <typeparam name="T">Enum type</typeparam>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToBool(System.String)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Boolean"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <returns>True if parsing is successful else false</returns>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToInt(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int32"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToLong(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int64"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToByte(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Byte"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToSByte(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.SByte"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToShort(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Int16"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToUShort(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt16"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToUInt(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt32"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToULong(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.UInt64"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToFloat(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Single"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToDouble(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Double"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToDecimal(System.String,System.Globalization.NumberStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.Decimal"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="style">style to use during parsing</param>
+            <param name="formatProvider">format provider</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToDateTime(System.String,System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value using exact parsing.
+            If parsing is successful then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="format">date format string</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToDateTime(System.String,System.String[],System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value using exact parsing
+            based on given set of formats. If parsing is successful then returns the parsed value 
+            else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="formats">date format strings</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.StringExt.StringUnsafe.ToDateTime(System.String,System.Globalization.DateTimeStyles,System.IFormatProvider)">
+            <summary>
+            Tries parsing <seealso cref="T:System.String"/> to <seealso cref="T:System.DateTime"/> value. If parsing is successful
+            then returns the parsed value else throws an exception.
+            </summary>
+            <param name="input">string to parse</param>
+            <param name="formatProvider">format provider</param>
+            <param name="style">datetime style</param>
+            <returns>True if parsing is successful else false</returns>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">with <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.StringParsingFailed"/></exception>
+        </member>
+        <member name="T:Dot.Net.DevFast.Extensions.ThrowIfPredicate">
+            <summary>
+            Extension library to produce conditional error based on a predicate
+            </summary>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIf``1(System.Boolean,Dot.Net.DevFast.Etc.DdnDfErrorCode,``0)">
+            <summary>
+            Throws exception when <paramref name="truthValue"/> is true.
+            </summary>
+            <param name="truthValue">truth value</param>
+            <param name="errorCode">error code of the exception</param>
+            <param name="obj">Object to return if condition is false</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIf``1(System.Boolean,Dot.Net.DevFast.Etc.DdnDfErrorCode,System.String,``0)">
+            <summary>
+            Throws exception when <paramref name="truthValue"/> is true.
+            </summary>
+            <param name="truthValue">truth value</param>
+            <param name="errorCode">error code of the exception</param>
+            <param name="errorMessage">Error message</param>
+            <param name="obj">Object to return if condition is false</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIf``1(System.Boolean,Dot.Net.DevFast.Etc.DdnDfErrorCode,System.Func{System.String},``0)">
+            <summary>
+            Throws exception when <paramref name="truthValue"/> is true.
+            </summary>
+            <param name="truthValue">truth value</param>
+            <param name="errorCode">error code of the exception</param>
+            <param name="errorMessageDelegate">Error message delegate</param>
+            <param name="obj">Object to return if condition is false</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNot``1(System.Boolean,Dot.Net.DevFast.Etc.DdnDfErrorCode,``0)">
+            <summary>
+            Throws exception when <paramref name="truthValue"/> is false.
+            </summary>
+            <param name="truthValue">truth value</param>
+            <param name="errorCode">error code of the exception</param>
+            <param name="obj">Object to return if condition is true</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNot``1(System.Boolean,Dot.Net.DevFast.Etc.DdnDfErrorCode,System.String,``0)">
+            <summary>
+            Throws exception when <paramref name="truthValue"/> is false.
+            </summary>
+            <param name="truthValue">truth value</param>
+            <param name="errorCode">error code of the exception</param>
+            <param name="errorMessage">Error message</param>
+            <param name="obj">Object to return if condition is true</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNot``1(System.Boolean,Dot.Net.DevFast.Etc.DdnDfErrorCode,System.Func{System.String},``0)">
+            <summary>
+            Throws exception when <paramref name="truthValue"/> is false.
+            </summary>
+            <param name="truthValue">truth value</param>
+            <param name="errorCode">error code of the exception</param>
+            <param name="errorMessageDelegate">Error message delegate</param>
+            <param name="obj">Object to return if condition is true</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException"></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNull``1(``0)">
+            <summary>
+            Throws exception when provided object is null else same object instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Any reference type</typeparam>
+            <param name="obj">instance</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullObject"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNull``1(``0,System.String)">
+            <summary>
+            Throws exception when provided object is null else same object instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Any reference type</typeparam>
+            <param name="obj">instance</param>
+            <param name="errorMessage">error message of the exception</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullObject"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNull``1(``0,System.Func{System.String})">
+            <summary>
+            Throws exception when provided object is null else same object instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Any reference type</typeparam>
+            <param name="obj">instance</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullObject"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNullOrEmpty``1(``0)">
+            <summary>
+            Throws exception when provided array is either null or empty. Same object instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Collection type</typeparam>
+            <param name="obj">instance</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullOrEmptyCollection"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNullOrEmpty``1(``0,System.String)">
+            <summary>
+            Throws exception when provided array is either null or empty. Same object instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Collection type</typeparam>
+            <param name="obj">instance</param>
+            <param name="errorMessage">error message of the exception</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullOrEmptyCollection"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNullOrEmpty``1(``0,System.Func{System.String})">
+            <summary>
+            Throws exception when provided array is either null or empty. Same object instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Collection type</typeparam>
+            <param name="obj">instance</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.NullOrEmptyCollection"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowOnMiss``2(``0,``1)">
+            <summary>
+            Throws exception when provided value is not in the collection. Else collection instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Collection type</typeparam>
+            <typeparam name="TV">Generic param type of the Collection</typeparam>
+            <param name="collection">collection instance</param>
+            <param name="lookUpValue">look up value instance</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotInCollection"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowOnMiss``2(``0,``1,System.String)">
+            <summary>
+            Throws exception when provided value is not in the collection. Else collection instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Array type</typeparam>
+            <typeparam name="TV">Generic param type of the Collection</typeparam>
+            <param name="collection">collection instance</param>
+            <param name="lookUpValue">look up value instance</param>
+            <param name="errorMessage">error message of the exception</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotInCollection"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowOnMiss``2(``0,``1,System.Func{System.String})">
+            <summary>
+            Throws exception when provided value not ont in the collection. Else collection instance is returned
+            to performed method chaining.
+            </summary>
+            <typeparam name="T">Array type</typeparam>
+            <typeparam name="TV">Generic param type of the Collection</typeparam>
+            <param name="collection">collection instance</param>
+            <param name="lookUpValue">look up value instance</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotInCollection"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowOnMiss``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0)">
+            <summary>
+            Throws exception when provided key is not found in dictionary. Else associated value instance is returned
+            to performed method chaining on the value.
+            </summary>
+            <typeparam name="TK">Type of key of the dictionary</typeparam>
+            <typeparam name="TV">Type of value of the dictionary</typeparam>
+            <param name="dictionary">dictionary instance</param>
+            <param name="key">key instance</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.KeyNotFound"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowOnMiss``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,System.String)">
+            <summary>
+            Throws exception when provided key is not found in dictionary. Else associated value instance is returned
+            to performed method chaining on the value.
+            </summary>
+            <typeparam name="TK">Type of key of the dictionary</typeparam>
+            <typeparam name="TV">Type of value of the dictionary</typeparam>
+            <param name="dictionary">dictionary instance</param>
+            <param name="key">key instance</param>
+            <param name="errorMessage">error message of the exception</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.KeyNotFound"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowOnMiss``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,System.Func{System.String})">
+            <summary>
+            Throws exception when provided key is not found in dictionary. Else associated value instance is returned
+            to performed method chaining on the value.
+            </summary>
+            <typeparam name="TK">Type of key of the dictionary</typeparam>
+            <typeparam name="TV">Type of value of the dictionary</typeparam>
+            <param name="dictionary">dictionary instance</param>
+            <param name="key">key instance</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.KeyNotFound"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfZero(System.Int32)">
+            <summary>
+            Throws exception when given value is 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfZero(System.Int32,System.String)">
+            <summary>
+            Throws exception when given value is 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfZero(System.Int32,System.Func{System.String})">
+            <summary>
+            Throws exception when given value is 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotZero(System.Int32)">
+            <summary>
+            Throws exception when given value is NOT 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotZero(System.Int32,System.String)">
+            <summary>
+            Throws exception when given value is NOT 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotZero(System.Int32,System.Func{System.String})">
+            <summary>
+            Throws exception when given value is NOT 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual(System.Int32,System.Int32)">
+            <summary>
+            Throws exception when <paramref name="value"/>==<paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual(System.Int32,System.Int32,System.String)">
+            <summary>
+            Throws exception when <paramref name="value"/>==<paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual(System.Int32,System.Int32,System.Func{System.String})">
+            <summary>
+            Throws exception when <paramref name="value"/>==<paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual(System.Int32,System.Int32)">
+            <summary>
+            Throws exception when <paramref name="value"/> != <paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual(System.Int32,System.Int32,System.String)">
+            <summary>
+            Throws exception when <paramref name="value"/> != <paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual(System.Int32,System.Int32,System.Func{System.String})">
+            <summary>
+            Throws exception when <paramref name="value"/> != <paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNegative(System.Int32)">
+            <summary>
+            Throws exception when given value is strictly less than 0 (-1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNegative(System.Int32,System.String)">
+            <summary>
+            Throws exception when given value is strictly less than 0 (-1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNegative(System.Int32,System.Func{System.String})">
+            <summary>
+            Throws exception when given value is strictly less than 0 (-1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess(System.Int32,System.Int32)">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value instance to compare</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess(System.Int32,System.Int32,System.String)">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess(System.Int32,System.Int32,System.Func{System.String})">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfPositive(System.Int32)">
+            <summary>
+            Throws exception when given value is strictly greater than 0 (+1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfPositive(System.Int32,System.String)">
+            <summary>
+            Throws exception when given value is strictly greater than 0 (+1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfPositive(System.Int32,System.Func{System.String})">
+            <summary>
+            Throws exception when given value is strictly greater than 0 (+1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater(System.Int32,System.Int32)">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater(System.Int32,System.Int32,System.String)">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater(System.Int32,System.Int32,System.Func{System.String})">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfZero(System.Int64)">
+            <summary>
+            Throws exception when given value is 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfZero(System.Int64,System.String)">
+            <summary>
+            Throws exception when given value is 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfZero(System.Int64,System.Func{System.String})">
+            <summary>
+            Throws exception when given value is 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual(System.Int64,System.Int64)">
+            <summary>
+            Throws exception when <paramref name="value"/>==<paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual(System.Int64,System.Int64,System.String)">
+            <summary>
+            Throws exception when <paramref name="value"/>==<paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual(System.Int64,System.Int64,System.Func{System.String})">
+            <summary>
+            Throws exception when <paramref name="value"/>==<paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotZero(System.Int64)">
+            <summary>
+            Throws exception when given value is NOT 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotZero(System.Int64,System.String)">
+            <summary>
+            Throws exception when given value is NOT 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotZero(System.Int64,System.Func{System.String})">
+            <summary>
+            Throws exception when given value is NOT 0.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual(System.Int64,System.Int64)">
+            <summary>
+            Throws exception when <paramref name="value"/> != <paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual(System.Int64,System.Int64,System.String)">
+            <summary>
+            Throws exception when <paramref name="value"/> != <paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual(System.Int64,System.Int64,System.Func{System.String})">
+            <summary>
+            Throws exception when <paramref name="value"/> != <paramref name="comperand"/>.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNegative(System.Int64)">
+            <summary>
+            Throws exception when given value is strictly less than 0 (-1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNegative(System.Int64,System.String)">
+            <summary>
+            Throws exception when given value is strictly less than 0 (-1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNegative(System.Int64,System.Func{System.String})">
+            <summary>
+            Throws exception when given value is strictly less than 0 (-1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess(System.Int64,System.Int64)">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value instance to compare</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess(System.Int64,System.Int64,System.String)">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess(System.Int64,System.Int64,System.Func{System.String})">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfPositive(System.Int64)">
+            <summary>
+            Throws exception when given value is strictly greater than 0 (+1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfPositive(System.Int64,System.String)">
+            <summary>
+            Throws exception when given value is strictly greater than 0 (+1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfPositive(System.Int64,System.Func{System.String})">
+            <summary>
+            Throws exception when given value is strictly greater than 0 (+1 onwards).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater(System.Int64,System.Int64)">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater(System.Int64,System.Int64,System.String)">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater(System.Int64,System.Int64,System.Func{System.String})">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual``1(``0,``0)">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual``1(``0,``0,System.String)">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual``1(``0,``0,System.Func{System.String})">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="comparer">comparer instance</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0},System.String)">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="comparer">comparer instance</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0},System.Func{System.String})">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="comparer">comparer instance</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual``1(``0,``0)">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are NOT equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual``1(``0,``0,System.String)">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are NOT equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual``1(``0,``0,System.Func{System.String})">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are NOT equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are NOT equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="comparer">comparer instance</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0},System.String)">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are NOT equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="comparer">comparer instance</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0},System.Func{System.String})">
+            <summary>
+            Throws exception when <paramref name="value"/> and <paramref name="comperand"/> are NOT equal.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="comperand">value to compare to</param>
+            <param name="comparer">comparer instance</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueNotEqual"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess``1(``0,``0)">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value instance to compare</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess``1(``0,``0,System.String)">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfLess``1(``0,``0,System.Func{System.String})">
+            <summary>
+            Throws exception when given comparable value is strictly less than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueLessThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater``1(``0,``0)">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater``1(``0,``0,System.String)">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfGreater``1(``0,``0,System.Func{System.String})">
+            <summary>
+            Throws exception when given comparable value is strictly greater than given threshold.
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="threshold">Threshold value of comparison</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueGreaterThanThreshold"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotBounded``1(``0,``0,``0)">
+            <summary>
+            Throws exception when given comparable value is out of bound (both bound exclusive, i.e.,
+            throws when <paramref name="value"/> &lt; LowerOfTwoBound OR <paramref name="value"/> &gt; HigherOfTwoBound).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="firstBoundExcl">first bound of comparison</param>
+            <param name="secondBoundExcl">second bound of comparison</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueOutOfBound"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotBounded``1(``0,``0,``0,System.String)">
+            <summary>
+            Throws exception when given comparable value is out of bound (both bound exclusive, i.e.,
+            throws when <paramref name="value"/> &lt; LowerOfTwoBound OR <paramref name="value"/> &gt; HigherOfTwoBound).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="firstBoundExcl">first bound of comparison</param>
+            <param name="secondBoundExcl">second bound of comparison</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueOutOfBound"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfNotBounded``1(``0,``0,``0,System.Func{System.String})">
+            <summary>
+            Throws exception when given comparable value is out of bound (both bound exclusive, i.e.,
+            throws when <paramref name="value"/> &lt; LowerOfTwoBound OR <paramref name="value"/> &gt; HigherOfTwoBound).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="firstBoundExcl">first bound of comparison</param>
+            <param name="secondBoundExcl">second bound of comparison</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueOutOfBound"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfBounded``1(``0,``0,``0)">
+            <summary>
+            Throws exception when given comparable value is within the bounds (both bound inclusive, i.e.,
+            throws when LowerOfTwoBound &lt;= <paramref name="value"/> &lt;= HigherOfTwoBound).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="firstBoundExcl">first bound of comparison</param>
+            <param name="secondBoundExcl">second bound of comparison</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueInBound"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfBounded``1(``0,``0,``0,System.String)">
+            <summary>
+            Throws exception when given comparable value is within the bounds (both bound inclusive, i.e.,
+            throws when LowerOfTwoBound &lt;= <paramref name="value"/> &lt;= HigherOfTwoBound).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="firstBoundExcl">first bound of comparison</param>
+            <param name="secondBoundExcl">second bound of comparison</param>
+            <param name="errorMessage">error message</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueInBound"/></exception>
+        </member>
+        <member name="M:Dot.Net.DevFast.Extensions.ThrowIfPredicate.ThrowIfBounded``1(``0,``0,``0,System.Func{System.String})">
+            <summary>
+            Throws exception when given comparable value is within the bounds (both bound inclusive, i.e.,
+            throws when LowerOfTwoBound &lt;= <paramref name="value"/> &lt;= HigherOfTwoBound).
+            Else <paramref name="value"/> is returned to performed method chaining.
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="firstBoundExcl">first bound of comparison</param>
+            <param name="secondBoundExcl">second bound of comparison</param>
+            <param name="errorMessageDelegate">error message generating delegate</param>
+            <exception cref="T:Dot.Net.DevFast.Etc.DdnDfException">Error code as <seealso cref="F:Dot.Net.DevFast.Etc.DdnDfErrorCode.ValueInBound"/></exception>
+        </member>
+    </members>
+</doc>

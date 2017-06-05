@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CrptoTrade.Assets;
-using Microsoft.Practices.ObjectBuilder2;
-using Newtonsoft.Json.Linq;
 
 namespace CrptoTrade.Trading
 {
     public interface IBuyer
     {
-        Task BuyAsync(decimal size, decimal price);
+        //returns unfilled size
+        Task<decimal> BuyAsync(decimal size, decimal price);
     }
 
     public interface ISeller
     {
-        Task SellAsync(decimal size, decimal price);
+        //returns unfilled size
+        Task<decimal> SellAsync(decimal size, decimal price);
     }
 
     public interface ITrader : IBuyer, ISeller
@@ -36,7 +32,7 @@ namespace CrptoTrade.Trading
         }
 
         public abstract void HandleQuote(string quoteMessage);
-        public abstract Task BuyAsync(decimal size, decimal price);
-        public abstract Task SellAsync(decimal size, decimal price);
+        public abstract Task<decimal> BuyAsync(decimal size, decimal price);
+        public abstract Task<decimal> SellAsync(decimal size, decimal price);
     }
 }

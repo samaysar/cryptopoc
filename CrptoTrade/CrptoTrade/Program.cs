@@ -1,9 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using Microsoft.Owin.Hosting;
-using SuperSocket.ClientEngine;
-using WebSocket4Net;
 
 namespace CrptoTrade
 {

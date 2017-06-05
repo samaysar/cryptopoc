@@ -12,6 +12,13 @@ namespace CryptoTrade.Tests
     public class HeapsTest
     {
         [Test]
+        public void Tt()
+        {
+            Console.Out.WriteLine(
+$@"{{""size"": ""{1.1} "",""price"": ""{0.00000001m} "",""side"": ""{"buy"} "",""product_id"": ""{"usd-us"} "",""time_in_force"":""IOC""}}");
+        }
+
+        [Test]
         [TestCase(true, 256 * 1024, false, 0)] //256k
         [TestCase(false, 256 * 1024, false, 0)] //256k
         [TestCase(true, 1024 * 1024, false, 0)] //1M

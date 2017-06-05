@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CrptoTrade.Assets
 {
@@ -9,9 +10,12 @@ namespace CrptoTrade.Assets
 
     public sealed class MinHeap<T> : AbsHeap<T> where T : IComparable<T>
     {
+        private readonly Timer _stats;
+
         public MinHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024)
             : base(id, 1, equalityComparer, initialCapax)
         {
+            _stats = new Timer(_ => Console.WriteLine($"MinHeap:{_highIndex}"), null, 5000, 5000);
         }
 
         protected override bool StopBubbleUp(T parent, T child)
@@ -47,9 +51,11 @@ namespace CrptoTrade.Assets
 
     public sealed class MaxHeap<T> : AbsHeap<T> where T : IComparable<T>
     {
+        private readonly Timer _stats;
         public MaxHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024)
             : base(id, -1, equalityComparer, initialCapax)
         {
+            _stats = new Timer(_ => Console.WriteLine($"MaxHeap:{_highIndex}"), null, 5000, 5000);
         }
 
         protected override bool StopBubbleUp(T parent, T child)
@@ -87,14 +93,14 @@ namespace CrptoTrade.Assets
     {
         private readonly int _emptyDefault;
         public static readonly IEqualityComparer<AbsHeap<T>> Equality = new AbsHeapEquality();
-        private int _highIndex;
+        protected int _highIndex;
         private readonly object _syncRoot = new object();
         private readonly List<PositionWrapped> _data;
 
         //PartitionedDictionary ? => Not now!
         private readonly Dictionary<T, PositionWrapped> _positionLookUp;
         public event MinChangeHandler RootChanged = x => { };
-
+        
         protected AbsHeap(int id, int emptyDefault, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024)
         {
             _emptyDefault = emptyDefault;
@@ -116,6 +122,36 @@ namespace CrptoTrade.Assets
                 finally
                 {
                     if (_positionLookUp.TryGetValue(val, out PositionWrapped intervalVal))
+                    {
+                        var position = intervalVal.Position;
+                        if (position != _highIndex)
+                        {
+                            _data[position] = new PositionWrapped(_data[_highIndex].Obj, position);
+                            _data.RemoveAt(_highIndex);
+                            if (position != --_highIndex) Heapify(position);
+                        }
+                        else
+                        {
+                            _data.RemoveAt(position);
+                            _highIndex--;
+                        }
+                        _positionLookUp.Remove(val);
+                    }
+                }
+            }
+        }
+
+        public void Remove(T val, Func<T, bool> predicate)
+        {
+            lock (_syncRoot)
+            {
+                try
+                {
+                }
+                finally
+                {
+                    if (_positionLookUp.TryGetValue(val, out PositionWrapped intervalVal) && 
+                        predicate(intervalVal.Obj))
                     {
                         var position = intervalVal.Position;
                         if (position != _highIndex)

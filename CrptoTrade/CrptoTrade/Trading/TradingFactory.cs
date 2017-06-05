@@ -6,13 +6,13 @@ namespace CrptoTrade.Trading
     {
         private readonly Dictionary<CryptoCurrency, TraderGroup> _lookup;
 
-        public TradingFactory()
+        public TradingFactory(IExchange[] xchgs)
         {
             _lookup = new Dictionary<CryptoCurrency, TraderGroup>
             {
-                [CryptoCurrency.Btc] = new TraderGroup(CryptoCurrency.Btc),
-                [CryptoCurrency.Eth] = new TraderGroup(CryptoCurrency.Eth),
-                [CryptoCurrency.Ltc] = new TraderGroup(CryptoCurrency.Ltc)
+                [CryptoCurrency.Btc] = new TraderGroup(CryptoCurrency.Btc, xchgs),
+                [CryptoCurrency.Eth] = new TraderGroup(CryptoCurrency.Eth, xchgs),
+                [CryptoCurrency.Ltc] = new TraderGroup(CryptoCurrency.Ltc, xchgs)
             };
         }
 

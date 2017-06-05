@@ -10,6 +10,7 @@ namespace CrptoTrade.Assets
 
         //we go low on GC
         public static readonly IEqualityComparer<Quote> Equality = new QuoteEquality();
+        private decimal _totalSize;
 
         //can we set it somewhr as const value?
         public readonly decimal MinSize;
@@ -18,20 +19,30 @@ namespace CrptoTrade.Assets
         public readonly decimal QuotePrice;
         public readonly string Id;
 
-        public decimal QuoteSize { get; private set; }
+        public decimal QuoteSize => _totalSize;
 
-        public bool Invalid => QuoteSize <= 0;
+        public bool Invalid => _totalSize <= 0;
 
         public Quote(decimal quotePrice, decimal totalSize, string id, decimal stepSize,
             ITrader quoteTrader, decimal minSize = 0.01m)
         {
             Id = id;
             QuotePrice = quotePrice;
-            QuoteSize = totalSize;
+            _totalSize = totalSize;
             Stepsize = stepSize;
             MinDollar = minSize * quotePrice;
             MinSize = minSize;
             _quoteTrader = quoteTrader;
+        }
+
+        public void AdjustSize(decimal tominus)
+        {
+            _totalSize -= tominus;
+        }
+
+        public void NewSize(decimal newSize)
+        {
+            _totalSize = newSize;
         }
 
         public void AdjustBuyPosition(BuyPosition position)
@@ -47,7 +58,7 @@ namespace CrptoTrade.Assets
                 //if my trade is partially consuming it and I modify the quantity
                 //then I have to take extra precautions on notification when adjusting its size
                 //let the notif do its work.
-                QuoteSize = 0;
+                _totalSize = 0;
             }
         }
 
@@ -64,7 +75,7 @@ namespace CrptoTrade.Assets
                 //if my trade is partially consuming it and I modify the quantity
                 //then I have to take extra precautions on notification when adjusting its size
                 //let the notif do its work.
-                QuoteSize = 0;
+                _totalSize = 0;
             }
         }
 
