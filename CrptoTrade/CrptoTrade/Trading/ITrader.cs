@@ -25,10 +25,10 @@ namespace CrptoTrade.Trading
         protected readonly MinHeap<Quote> _askHeap;
         protected readonly MaxHeap<Quote> _bidHeap;
 
-        protected CurrencyTrader(int id, int initialCapex = 16*1024)
+        protected CurrencyTrader(int id, string heapName, int initialCapex = 16*1024)
         {
-            _askHeap = new MinHeap<Quote>(id, Quote.Equality, initialCapex);
-            _bidHeap = new MaxHeap<Quote>(id, Quote.Equality, initialCapex);
+            _askHeap = new MinHeap<Quote>(id, Quote.Equality, initialCapex, heapName);
+            _bidHeap = new MaxHeap<Quote>(id, Quote.Equality, initialCapex, heapName);
         }
 
         public abstract void HandleQuote(string quoteMessage);

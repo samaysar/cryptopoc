@@ -12,10 +12,11 @@ namespace CrptoTrade.Assets
     {
         private readonly Timer _stats;
 
-        public MinHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024)
+        public MinHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024,
+            string heapName = "")
             : base(id, 1, equalityComparer, initialCapax)
         {
-            _stats = new Timer(_ => Console.WriteLine($"MinHeap:{_highIndex}"), null, 5000, 5000);
+            _stats = new Timer(_ => Console.WriteLine($"{heapName} MinHeap:{HighIndex}"), null, 5000, 5000);
         }
 
         protected override bool StopBubbleUp(T parent, T child)
@@ -52,10 +53,11 @@ namespace CrptoTrade.Assets
     public sealed class MaxHeap<T> : AbsHeap<T> where T : IComparable<T>
     {
         private readonly Timer _stats;
-        public MaxHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024)
+        public MaxHeap(int id, IEqualityComparer<T> equalityComparer, int initialCapax = 16 * 1024,
+            string heapName = "")
             : base(id, -1, equalityComparer, initialCapax)
         {
-            _stats = new Timer(_ => Console.WriteLine($"MaxHeap:{_highIndex}"), null, 5000, 5000);
+            _stats = new Timer(_ => Console.WriteLine($"{heapName} MaxHeap:{HighIndex}"), null, 5000, 5000);
         }
 
         protected override bool StopBubbleUp(T parent, T child)
@@ -93,7 +95,7 @@ namespace CrptoTrade.Assets
     {
         private readonly int _emptyDefault;
         public static readonly IEqualityComparer<AbsHeap<T>> Equality = new AbsHeapEquality();
-        protected int _highIndex;
+        protected int HighIndex;
         private readonly object _syncRoot = new object();
         private readonly List<PositionWrapped> _data;
 
@@ -107,7 +109,7 @@ namespace CrptoTrade.Assets
             Id = id;
             _data = new List<PositionWrapped>(initialCapax);
             _positionLookUp = new Dictionary<T, PositionWrapped>(initialCapax, equalityComparer);
-            _highIndex = -1;
+            HighIndex = -1;
         }
 
         public int Id { get; }
@@ -124,17 +126,17 @@ namespace CrptoTrade.Assets
                     if (_positionLookUp.TryGetValue(val, out PositionWrapped intervalVal))
                     {
                         var position = intervalVal.Position;
-                        if (position != _highIndex)
+                        if (position != HighIndex)
                         {
-                            _data[position] = _data[_highIndex];
-                            _data[_highIndex].Position = position;
-                            _data.RemoveAt(_highIndex);
-                            if (position != --_highIndex) Heapify(position);
+                            _data[position] = _data[HighIndex];
+                            _data[HighIndex].Position = position;
+                            _data.RemoveAt(HighIndex);
+                            if (position != --HighIndex) Heapify(position);
                         }
                         else
                         {
                             _data.RemoveAt(position);
-                            _highIndex--;
+                            HighIndex--;
                         }
                         _positionLookUp.Remove(val);
                     }
@@ -155,17 +157,17 @@ namespace CrptoTrade.Assets
                         predicate(intervalVal.Obj))
                     {
                         var position = intervalVal.Position;
-                        if (position != _highIndex)
+                        if (position != HighIndex)
                         {
-                            _data[position] = _data[_highIndex];
-                            _data[_highIndex].Position = position;
-                            _data.RemoveAt(_highIndex);
-                            if (position != --_highIndex) Heapify(position);
+                            _data[position] = _data[HighIndex];
+                            _data[HighIndex].Position = position;
+                            _data.RemoveAt(HighIndex);
+                            if (position != --HighIndex) Heapify(position);
                         }
                         else
                         {
                             _data.RemoveAt(position);
-                            _highIndex--;
+                            HighIndex--;
                         }
                         _positionLookUp.Remove(val);
                     }
@@ -225,7 +227,7 @@ namespace CrptoTrade.Assets
                     var wrapper = new PositionWrapped(newVal, _data.Count);
                     _positionLookUp.Add(newVal, wrapper);
                     _data.Add(wrapper);
-                    current = ++_highIndex;
+                    current = ++HighIndex;
                     while (current > 0)
                     {
                         var parent = (current - 1) >> 1;
@@ -255,7 +257,7 @@ namespace CrptoTrade.Assets
         {
             lock (_syncRoot)
             {
-                if (_highIndex < 0)
+                if (HighIndex < 0)
                 {
                     val = default(T);
                     return false;
@@ -263,10 +265,10 @@ namespace CrptoTrade.Assets
                 val = _data[0].Obj;
                 if (!predicate(val)) return false;
                 if (!extractIfPredicate) return true;
-                _data[0] = _data[_highIndex];
+                _data[0] = _data[HighIndex];
                 _data[0].Position = 0;
                 _positionLookUp.Remove(val);
-                _data.RemoveAt(_highIndex--);
+                _data.RemoveAt(HighIndex--);
                 Heapify(0);
             }
             return true;
@@ -288,14 +290,14 @@ namespace CrptoTrade.Assets
         {
             lock (_syncRoot)
             {
-                if (_highIndex < 0) return false;
+                if (HighIndex < 0) return false;
                 var val = _data[0].Obj;
                 if (!predicate(val)) return false;
-                _data[0] = _data[_highIndex];
+                _data[0] = _data[HighIndex];
                 _data[0].Position = 0;
                 _positionLookUp.Remove(val);
-                _data.RemoveAt(_highIndex--);
-                if (_highIndex > 0) Heapify(0);
+                _data.RemoveAt(HighIndex--);
+                if (HighIndex > 0) Heapify(0);
             }
             return true;
         }
@@ -346,7 +348,7 @@ namespace CrptoTrade.Assets
             lock (_syncRoot)
             {
                 //we need to compare "GIVEN" value to our value!!!
-                return _highIndex < 0 ? -_emptyDefault : val.CompareTo(_data[0].Obj);
+                return HighIndex < 0 ? -_emptyDefault : val.CompareTo(_data[0].Obj);
             }
         }
 
@@ -360,7 +362,7 @@ namespace CrptoTrade.Assets
             T myVal;
             lock (_syncRoot)
             {
-                if (_highIndex < 0)
+                if (HighIndex < 0)
                 {
                     return _emptyDefault;
                 }

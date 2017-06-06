@@ -55,9 +55,9 @@ namespace CrptoTrade.Trading
         {
             _authClient = authClient;
             _id = id;
-            var btcTrader = new GdaxTrader(this, "BTC-USD", MinSize, StepSize, id, initialCapex);
-            var ethTrader = new GdaxTrader(this, "ETH-USD", MinSize, StepSize, id, initialCapex);
-            var ltcTrader = new GdaxTrader(this, "LTC-USD", MinSize, StepSize, id, initialCapex);
+            var btcTrader = new GdaxTrader(this, "BTC-USD", MinSize, StepSize, id, "Gdax BTC", initialCapex);
+            var ethTrader = new GdaxTrader(this, "ETH-USD", MinSize, StepSize, id, "Gdax ETH", initialCapex);
+            var ltcTrader = new GdaxTrader(this, "LTC-USD", MinSize, StepSize, id, "Gdax LTC", initialCapex);
             _heapLookup = new Dictionary<CryptoCurrency, GdaxTrader>
             {
                 {CryptoCurrency.Btc, btcTrader},
@@ -201,7 +201,7 @@ namespace CrptoTrade.Trading
             private readonly decimal _stepSize;
 
             public GdaxTrader(GdaxExchange xchg, string ticker, decimal minSize, decimal stepSize, int id,
-                int initialCapex = 16384) : base(id, initialCapex)
+                string heapName, int initialCapex = 16384) : base(id, heapName, initialCapex)
             {
                 _xchg = xchg;
                 _ticker = ticker;
