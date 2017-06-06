@@ -27,7 +27,8 @@ namespace CrptoTrade.Trading
         {
             var sw = Stopwatch.StartNew();
             //we sleep for a while to simulate
-            await Task.Delay(_delay.Next(1, 10)).ConfigureAwait(false);
+            await Task.Delay(TimeSpan.FromMilliseconds(_delay.NextDouble() * _delay.Next(1, _delay.Next(5, 10))))
+                .ConfigureAwait(false);
             sw.Stop();
             return new TradeInfo
             {

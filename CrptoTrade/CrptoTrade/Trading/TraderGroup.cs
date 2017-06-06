@@ -46,7 +46,7 @@ namespace CrptoTrade.Trading
                     var finished = await Task.WhenAny(tasks).ConfigureAwait(false);
                     tasks.Remove(finished);
                     var info = await finished.ConfigureAwait(false);
-                    response.TradeSummary.Add(info.Summary(cnt++));
+                    response.TradeSummary.Add(info.Summary(++cnt));
                     buy.AddValue(info.Remains);
                     dollarVal += decimal.Round(info.DollarValue, 2);
                     tradeSize += info.TradeSize;
@@ -59,7 +59,7 @@ namespace CrptoTrade.Trading
             sw.Stop();
 
             response.Untraded = $"{decimal.Round(buy.Current, 2)}";
-            response.TotalValue = dollarVal.ToString("N");
+            response.TotalValue = $"{decimal.Round(dollarVal, 2)} $";
             response.TotalTraded = $"{tradeSize}";
             response.MsTime = ((int) (sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
             return response;
@@ -110,7 +110,7 @@ namespace CrptoTrade.Trading
                     var finished = await Task.WhenAny(tasks).ConfigureAwait(false);
                     tasks.Remove(finished);
                     var info = await finished.ConfigureAwait(false);
-                    response.TradeSummary.Add(info.Summary(cnt++));
+                    response.TradeSummary.Add(info.Summary(++cnt));
                     sell.AddSize(info.Remains);
                     dollarVal += info.DollarValue;
                     tradeSize += info.TradeSize;
@@ -123,7 +123,7 @@ namespace CrptoTrade.Trading
             sw.Stop();
 
             response.Untraded = $"{decimal.Round(sell.Current, 8)}";
-            response.TotalValue = dollarVal.ToString("N");
+            response.TotalValue = $"{decimal.Round(dollarVal, 2)} $";
             response.TotalTraded = $"{tradeSize}";
             response.MsTime = ((int)(sw.Elapsed.TotalMilliseconds * 1000)) / 1000.0m;
             return response;
